@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "https://hibernate.org/dtd/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+    <class name="ifmt.cba.projetoGestao.model.Departamento" table="Departamentos">
+        <id name="id" column="id">
+            <generator class="sequence"/>
+        </id>
+        <property name="nome" column="nome"/>
+        <many-to-one name="responsavel" class="ifmt.cba.projetoGestao.model.Usuario" column="usuario_id" not-null="true"></many-to-one>
+    </class>
+</hibernate-mapping>
