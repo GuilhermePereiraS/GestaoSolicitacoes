@@ -10,12 +10,12 @@
 <title>Login</title>
 </head>
 <body>
-	<form>
+	<html:form action="/identificaUsuario">
 	<label>Usuario:</label><br>
 	<input type="text"/><br>
 	<label>Senha:</label><br>
 	<input type="text"><br>
 	<button>submit</button>
-	</form>
+	</html:form>
 </body>
 </html>
