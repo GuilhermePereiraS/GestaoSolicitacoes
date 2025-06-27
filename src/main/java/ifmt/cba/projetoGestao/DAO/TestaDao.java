@@ -11,7 +11,7 @@ public class TestaDao {
 		Dao dao = new Dao();
 		Usuario u = new Usuario();
 		u.setNome("jorge");
-		dao.persiste(u);
+		System.out.println("oi");
 		}
 	}
 

@@ -6,16 +6,102 @@
 <struts-config>
  	<form-beans>
         <form-bean name="loginForm" type="ifmt.cba.projetoGestao.form.LoginForm"/> 
+        <form-bean name="cadastroForm" type="ifmt.cba.projetoGestao.form.CadastroForm"/> 
+        
+        <form-bean name="solicitacaoTabelaForm" type="ifmt.cba.projetoGestao.form.SolicitacaoTabelaForm"/>
+        <form-bean name="usuarioTabelaForm" type="ifmt.cba.projetoGestao.form.UsuarioTabelaForm"/>
+        <form-bean name="departamentoTabelaForm" type="ifmt.cba.projetoGestao.form.DepartamentoTabelaForm"/>
     </form-beans>
 
-
 	<action-mappings>
+	
+		<!-- Usuario -->
 		<action 
-		path="/login.jsp"
-		scope="request"
-		name="loginForm"
-		>
+			path="/autenticaUsuario"
+			type="ifmt.cba.projetoGestao.action.AutenticaUsuarioAction"
+			scope="session"
+			name="loginForm">
+			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
 		</action>
+		
+		<action 
+			path="/cadastraUsuario"
+			type="ifmt.cba.projetoGestao.action.AutenticaUsuarioAction"
+			scope="request"
+			name="cadastroForm">
+			<forward name="paginaInicial" path="/login.jsp"/>
+		</action>
+		
+		<action 
+			path="/atualizaUsuario"
+			type="ifmt.cba.projetoGestao.action.AtualizaUsuarioAction"
+			scope="request"
+			name="usuarioTabelaForm">
+			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<action 
+			path="/excluiUsuario"
+			type="ifmt.cba.projetoGestao.action.ExcluiUsuarioAction"
+			scope="request"
+			name="usuarioTabelaForm">
+			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<!-- Departamento -->
+		<action 
+			path="/adicionaDepartamento"
+			type="ifmt.cba.projetoGestao.action.AdicionaDepartamentoAction"
+			scope="request"
+			name="departamentoTabelaForm">
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<action 
+			path="/atualizaDepartamento"
+			type="ifmt.cba.projetoGestao.action.AtualizaDepartamentoAction"
+			scope="request"
+			name="departamentoTabelaForm">
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<action 
+			path="/excluiDepartamento"
+			type="ifmt.cba.projetoGestao.action.ExcluiDepartamentoAction"
+			scope="request"
+			name="departamentoTabelaForm">
+			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<!-- Solicitação -->
+		<action 
+			path="/adicionaSolicitaçao"
+			type="ifmt.cba.projetoGestao.action.AdicionaSolicitaçaoAction"
+			scope="request"
+			name="solicitacaoTabelaForm">
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<action 
+			path="/atualizaSolicitação"
+			type="ifmt.cba.projetoGestao.action.AtualizaSolicitaçãoAction"
+			scope="request"
+			name="solicitacaoTabelaForm">
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<action 
+			path="/excluiSolicitação"
+			type="ifmt.cba.projetoGestao.action./ExcluiSolicitaçãoAction"
+			scope="request"
+			name="solicitacaoTabelaForm">
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
 	</action-mappings>
     
 </struts-config>
