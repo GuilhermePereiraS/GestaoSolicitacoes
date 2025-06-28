@@ -18,7 +18,7 @@
 		<!-- Usuario -->
 		<action 
 			path="/autenticaUsuario"
-			type="ifmt.cba.projetoGestao.action.AutenticaUsuarioAction"
+			type="ifmt.cba.projetoGestao.action.usuario.AutenticaUsuarioAction"
 			scope="session"
 			name="loginForm">
 			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
@@ -27,24 +27,25 @@
 		
 		<action 
 			path="/cadastraUsuario"
-			type="ifmt.cba.projetoGestao.action.AutenticaUsuarioAction"
+			type="ifmt.cba.projetoGestao.action.usuario.CadastraUsuarioAction"
 			scope="request"
 			name="cadastroForm">
 			<forward name="paginaInicial" path="/login.jsp"/>
-		</action>
-		
-		<action 
-			path="/atualizaUsuario"
-			type="ifmt.cba.projetoGestao.action.AtualizaUsuarioAction"
-			scope="request"
-			name="usuarioTabelaForm">
 			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
 			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
 		</action>
 		
 		<action 
+			path="/atualizaUsuario"
+			type="ifmt.cba.projetoGestao.action.usuario.AtualizaUsuarioAction"
+			scope="request"
+			name="usuarioTabelaForm">
+			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
+		</action>
+		
+		<action 
 			path="/excluiUsuario"
-			type="ifmt.cba.projetoGestao.action.ExcluiUsuarioAction"
+			type="ifmt.cba.projetoGestao.action.usuario.ExcluiUsuarioAction"
 			scope="request"
 			name="usuarioTabelaForm">
 			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
@@ -54,7 +55,7 @@
 		<!-- Departamento -->
 		<action 
 			path="/adicionaDepartamento"
-			type="ifmt.cba.projetoGestao.action.AdicionaDepartamentoAction"
+			type="ifmt.cba.projetoGestao.action.departamento.AdicionaDepartamentoAction"
 			scope="request"
 			name="departamentoTabelaForm">
 			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
@@ -62,7 +63,7 @@
 		
 		<action 
 			path="/atualizaDepartamento"
-			type="ifmt.cba.projetoGestao.action.AtualizaDepartamentoAction"
+			type="ifmt.cba.projetoGestao.action.departamento.AtualizaDepartamentoAction"
 			scope="request"
 			name="departamentoTabelaForm">
 			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
@@ -70,7 +71,7 @@
 		
 		<action 
 			path="/excluiDepartamento"
-			type="ifmt.cba.projetoGestao.action.ExcluiDepartamentoAction"
+			type="ifmt.cba.projetoGestao.action.departamento.ExcluiDepartamentoAction"
 			scope="request"
 			name="departamentoTabelaForm">
 			<forward name="dashBoardPadrao" path="/WEB-INF/dashBoardPadrao.jsp"/>
@@ -79,24 +80,24 @@
 		
 		<!-- Solicitação -->
 		<action 
-			path="/adicionaSolicitaçao"
-			type="ifmt.cba.projetoGestao.action.AdicionaSolicitaçaoAction"
+			path="/adicionaSolicitacao"
+			type="ifmt.cba.projetoGestao.action.solicitacao.AdicionaSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
 			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
 		</action>
 		
 		<action 
-			path="/atualizaSolicitação"
-			type="ifmt.cba.projetoGestao.action.AtualizaSolicitaçãoAction"
+			path="/atualizaSolicitacao"
+			type="ifmt.cba.projetoGestao.action.solicitacao.AtualizaSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
 			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>
 		</action>
 		
 		<action 
-			path="/excluiSolicitação"
-			type="ifmt.cba.projetoGestao.action./ExcluiSolicitaçãoAction"
+			path="/excluiSolicitacao"
+			type="ifmt.cba.projetoGestao.action.solicitacao.ExcluiSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
 			<forward name="dashBoardAdmin" path="/WEB-INF/dashBoardAdmin.jsp"/>

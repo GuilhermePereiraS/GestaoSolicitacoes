@@ -1,4 +1,4 @@
-package ifmt.cba.projetoGestao.action;
+package ifmt.cba.projetoGestao.action.departamento;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,11 +8,15 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class InicializaLoginAction extends Action  {
+public class AdicionaDepartamentoAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		System.out.println("passou por aqui");
-		return mapping.findForward("paginaLogin");
+		String usuario = "admin";
+		if (usuario.equals("admin")) {
+			return mapping.findForward("dashBoardAdmin");
+		} else {
+			return mapping.findForward("invalido.jsp");
+		}
 	}
 }

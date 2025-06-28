@@ -2,18 +2,18 @@ package ifmt.cba.projetoGestao.form;
 
 import org.apache.struts.action.ActionForm;
 
-public class LoginForm extends ActionForm {
+public class UsuarioTabelaForm extends ActionForm {
 	private static final long serialVersionUID = 1L;
 	
-	private String login;
+	private String nome;
 	private String senha;
 	
 	
-	public String getLogin() {
-		return login;
+	public String getNome() {
+		return nome;
 	}
-	public void Login(String login) {
-		this.login = login;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public String getSenha() {
 		return senha;
