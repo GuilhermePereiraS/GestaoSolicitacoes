@@ -81,8 +81,8 @@
 	<label>Usuario:</label><br>
 	<html:text property="login"/><br>
 	<label>Senha:</label><br>
-	<html:text property="senha"/><br>
-	<input type="submit" value="login"/>
+	<html:password property="senha"/><br>
+	<html:submit value="Login"/>
 	</html:form>
 	<label style="margin-left: 30px">Não tem uma conta?</label> <a href="cadastro.jsp" style="margin-left: 15px">cadastre-se aqui</a>
 </body>
