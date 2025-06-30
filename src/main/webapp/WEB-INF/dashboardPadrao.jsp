@@ -88,7 +88,7 @@
 .menu-popup {
     display: none;
     position: absolute;
-    left: 32px;
+    right: 35px;
     bottom: 20px;
     background-color: white;
     border: 1px solid #ddd;
@@ -180,7 +180,6 @@
 				<th>Data de criação</th>
 				<th>Status</th>
 				<th></th>
-				<th></th>
 			</tr>
 		</thead>
 		
@@ -201,7 +200,7 @@
 					<td><fmt:formatDate value="${solicitacao.data_criacao}" pattern="dd/MM/yyyy" /></td>
 					<td><c:out value="${solicitacao.status}"></c:out></td>
 					<td style="display: none;"><c:out value="${solicitacao.id}"></c:out></td>
-					<td class = "tdBotaoMenu" style="position: relative; overflow: visible;">
+					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
 				        <div class="menu-popup">
 				            <a href="#" class="editarLink">Editar</a>
