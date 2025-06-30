@@ -45,17 +45,17 @@ public class Dao {
 		}
 	}
 	
-	public <t> List<t> lista(String NomeClasseObjeto) {
+	public <t> List<t> lista(String nomeClasseObjeto) {
 		Session session = null;
 		List<t> lista = null;
 		
-		if (!NomeClasseObjeto.equals("Usuario") && !NomeClasseObjeto.equals("Departamento") &&  !NomeClasseObjeto.equals("Solicitacao")) {
+		if (!nomeClasseObjeto.equals("Usuario") && !nomeClasseObjeto.equals("Departamento") &&  !nomeClasseObjeto.equals("Solicitacao")) {
 			System.err.println("Selecione uma opção valida: Usuario, Departamento ou Solicitacao");
 			return null;
 		}
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			lista = (List<t>) session.createQuery("from " + NomeClasseObjeto).list();
+			lista = (List<t>) session.createQuery("from " + nomeClasseObjeto).list();
 			
 			if (lista.isEmpty()) {
 				System.out.println("Lista Vazia");
@@ -105,6 +105,36 @@ public class Dao {
 				}
 			}
 		}
+	}
+	
+	public Object buscaPorId(String nomeClasseObjeto, int id) {
+		Transaction transaction = null;
+		Session session = null;
+		Object objeto = null;
+		
+		if (!nomeClasseObjeto.equals("Usuario") && !nomeClasseObjeto.equals("Departamento") &&  !nomeClasseObjeto.equals("Solicitacao")) {
+			System.err.println("Selecione uma opção valida: Usuario, Departamento ou Solicitacao");
+			return null;
+		}
+		
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			objeto = session.createQuery("from " + nomeClasseObjeto + " where id = "+ id).uniqueResult();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				if (session.isOpen()) {
+					try {
+						session.close();
+					} catch (HibernateException e) {
+						System.out.println("erro ao fechar a sessão: " + e.getMessage());
+					}
+				}
+			}
+		} 
+		
+		return objeto;
 	}
 	
 	public int contarTotal(String NomeClasseObjeto){

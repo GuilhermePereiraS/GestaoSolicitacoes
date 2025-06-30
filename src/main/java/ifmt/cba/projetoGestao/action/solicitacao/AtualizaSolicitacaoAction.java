@@ -19,27 +19,19 @@ import ifmt.cba.projetoGestao.model.Usuario;
 public class AtualizaSolicitacaoAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		Solicitacao solicitacao = new Solicitacao();
 		Dao dao = new Dao();
+		Solicitacao solicitacao = (Solicitacao) dao.buscaPorId("Solicitacao", Integer.parseInt(request.getParameter("id")));
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		solicitacao.setId(Integer.parseInt(request.getParameter("id")));
 		solicitacao.setTitulo(request.getParameter("titulo"));
 		solicitacao.setDescricao(request.getParameter("descricao"));
-		solicitacao.setData_criacao(sdf.parse(request.getParameter("dataCriacao")));
 		solicitacao.setStatus(request.getParameter("status"));
 		
-		int solicitanteId = Integer.parseInt(request.getParameter("solicitanteId"));
+		
 		int DepartamentoId = Integer.parseInt(request.getParameter("departamentoResponsavelId"));
 		
 		List<Usuario> listaU = dao.lista("Usuario");
-		List<Departamento> listaD = dao.lista("Departamento");
-		
-		for (Usuario u : listaU) {
-			if (u.getId() == solicitanteId) {
-				solicitacao.setSolicitante(u);
-			}
-		}
+		List<Departamento> listaD = dao.lista("Departamento");	
 		
 		for (Departamento d : listaD) {
 			if (d.getId() == DepartamentoId) {
