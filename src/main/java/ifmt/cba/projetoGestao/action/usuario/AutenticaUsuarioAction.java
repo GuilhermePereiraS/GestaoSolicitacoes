@@ -44,7 +44,6 @@ public class AutenticaUsuarioAction extends Action  {
 		}
 		
 		if (usuarioLogado != null) {
-			System.out.println("Usuario encontrado");
 			HttpSession session = request.getSession();
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} else {
