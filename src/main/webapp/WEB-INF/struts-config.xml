@@ -102,7 +102,7 @@
 			type="ifmt.cba.projetoGestao.action.solicitacao.AtualizaSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+			<forward name="dashBoard" path="/carregaDashboard.do"/>
 		</action>
 		
 		<action 
