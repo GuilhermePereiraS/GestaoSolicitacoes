@@ -30,14 +30,14 @@ public class AutenticaUsuarioAction extends Action  {
 		for (Usuario u : ListaUsuario) {
 			if (u.getLogin().equals(formPreechido.getLogin())) {
 				//desativa uma flag usuario não encontrado
-				for (Usuario u1 : ListaUsuario) {
-					if (u1.getSenha().equals(senhaCriptografada)) {
-						//desativa a flag senha não encontrada
-						usuarioLogado = u1;
-					} else {
-						//ativa alguma flag
-					}
+				if (u.getSenha().equals(senhaCriptografada)) {
+					//desativa a flag senha não encontrada
+					usuarioLogado = u;
+					break;
+				} else {
+					//ativa alguma flag
 				}
+				
 			} else {
 				
 			}

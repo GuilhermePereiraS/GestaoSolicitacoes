@@ -313,7 +313,7 @@ select:focus {
 			 <c:forEach items="${departamentos}" var="departamento">
 				<tr>
 					<td><c:out value="${departamento.nome}"></c:out></td>
-					<td><c:out value="${departamento.responsavel.nome}"></c:out></td>
+					<td data-id="${departamento.responsavel.id}"><c:out value="${departamento.responsavel.nome}"></c:out></td>
 					<td style="display: none;"><c:out value="${departamento.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
@@ -344,13 +344,9 @@ select:focus {
 	</form>
 	
 	<form class="formDepartamentoEdicao" method="post" action="/atualizaDepartamento.do" style="display: none;">
-	  <input type="hidden" name="id" />
-	  <input type="hidden" name="titulo" />
-	  <input type="hidden" name="descricao" />
-	  <input type="hidden" name="dataCriacao" />
-	  <input type="hidden" name="status" />
-	  <input type="hidden" name="solicitanteId" />
+	  <input type="hidden" name="nome" />
 	  <input type="hidden" name="departamentoResponsavelId" />
+	  <input type="hidden" name="id" />
 	</form>
 	
 	<script>
@@ -377,7 +373,6 @@ select:focus {
 			
 			const tr = this.closest('tr');
 			const tds = tr.querySelectorAll('td');
-			
 			function tdParaInput(td) {
 	            const texto = td.textContent;
 	            const input = document.createElement('input');
@@ -437,14 +432,20 @@ select:focus {
 			
 			tdParaInput(tds[0]); // mudar para bombox
 			tdParaInput(tds[1]);
-			tdParaInput(tds[2]);
+			tds[2].innerHTML = `
+				<select>
+					<option disabled selected>----</option>
+					<option>PADRÃO</option>
+					<option>ADMIN</option>
+				</select>	
+			`
 			
 			let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;
 			botaoSalvar = tr.querySelector("button");
 			botaoSalvar.addEventListener('click', ()=> {
 				const nome = tds[0].querySelector('input').value;
 				const login = tds[1].querySelector('input').value;
-				const perfil = tds[2].querySelector('input').value; //mudar para bombox
+				const perfil = tds[2].querySelector('select').value; //mudar para bombox
 				const id = tds[3].textContent;
 				
 				
@@ -478,17 +479,17 @@ select:focus {
 	        }
 			
 			tdParaInput(tds[0]); // mudar para bombox
-			tdParaInput(tds[1]);
-			tdParaInput(tds[2]);
-			tdParaInput(tds[3]);
-			tdParaInput(tds[4]); // mudar para caixa de calendario
-			tdParaInput(tds[5]); // mudar para bombox
+			
+			tds[1].innerHTML = `
+				<box:bombox atributoName="usuario" lista="${usuariosAdmin}"/>
+			`
+			
 			
 			let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;
 			botaoSalvar = tr.querySelector("button");
 			botaoSalvar.addEventListener('click', ()=> {
-				const departamentoResponsavelId = tds[0].getAttribute("data-id");
-				const titulo = tds[1].querySelector('input').value;
+				const nome = tds[0].querySelector('input').value;
+				const departamentoResponsavelId = tds[1].value;
 				const descricao = tds[2].querySelector('input').value;
 				const solicitanteId = tds[3].getAttribute("data-id");
 				const dataCriacao = tds[4].querySelector('input').value;
@@ -496,12 +497,8 @@ select:focus {
 				const id = tds[6].textContent;
 				
 				const form = document.querySelector(".formEdicao");
-				form.querySelector('[name="departamentoResponsavelId"]').value= departamentoResponsavelId;
-				form.querySelector('[name="titulo"]').value= titulo;
-				form.querySelector('[name="descricao"]').value= descricao;
-				form.querySelector('[name="solicitanteId"]').value= solicitanteId;
-				form.querySelector('[name="dataCriacao"]').value= dataCriacao;
-				form.querySelector('[name="status"]').value= status;
+				form.querySelector('[name="nome"]').value= departamentoResponsavelId;
+				form.querySelector('[name="departamentoResponsavelId"]').value= titulo;
 				form.querySelector('[name="id"]').value= id;
 				
 				form.submit();

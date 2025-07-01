@@ -48,42 +48,48 @@ public class BomboxCustomTag extends TagSupport {
 	}
 	
 	private List<String> pegaNomes(List<Object> listaDeObjetos) {
-		Class classeDoObjeto = listaDeObjetos.get(0).getClass();
-		Method metodoGetNome = null;
 		List<String> listaNomes = new ArrayList<>();
-		
-		try {
-			metodoGetNome = classeDoObjeto.getMethod("getNome");
+		if (listaDeObjetos != null && !listaDeObjetos.isEmpty()) {
+			Class classeDoObjeto = listaDeObjetos.get(0).getClass();
+			Method metodoGetNome = null;
 			
-			for (Object objeto : listaDeObjetos) {
-				String nome = (String) metodoGetNome.invoke(objeto);
-				listaNomes.add(nome);
+			try {
+				metodoGetNome = classeDoObjeto.getMethod("getNome");
+				
+				for (Object objeto : listaDeObjetos) {
+					String nome = (String) metodoGetNome.invoke(objeto);
+					listaNomes.add(nome);
+				}
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException | SecurityException e) {
+				System.out.println("Não deu pra achar o metodo!! " + e.getMessage());
 			}
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException | SecurityException e) {
-			System.out.println("Não deu pra achar o metodo!! " + e.getMessage());
-		}
-		
+		} else {
+			listaNomes.add("Lista Vazia");
+			}
 		return listaNomes;
 	}
 	
 	private List<Integer> pegaIds(List<Object> listaDeObjetos) {
-		Class classeDoObjeto = listaDeObjetos.get(0).getClass();
-		Method metodoGetId = null;
 		List<Integer> listaIds = new ArrayList<>();
-		
-		try {
-			metodoGetId = classeDoObjeto.getMethod("getId");
-			
-			for (Object objeto : listaDeObjetos) {
-				Integer id = (Integer) metodoGetId.invoke(objeto);
-				listaIds.add(id);
+		if (listaDeObjetos != null && !listaDeObjetos.isEmpty()) {
+			Class classeDoObjeto = listaDeObjetos.get(0).getClass();
+			Method metodoGetId = null;
+			try {
+				metodoGetId = classeDoObjeto.getMethod("getId");
+				
+				for (Object objeto : listaDeObjetos) {
+					Integer id = (Integer) metodoGetId.invoke(objeto);
+					listaIds.add(id);
+				}
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException | SecurityException e) {
+				System.out.println("Não deu pra achar o metodo!! " + e.getMessage());
 			}
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException | SecurityException e) {
-			System.out.println("Não deu pra achar o metodo!! " + e.getMessage());
+		} else {
+			listaIds.add(0);
 		}
 		
 		return listaIds;

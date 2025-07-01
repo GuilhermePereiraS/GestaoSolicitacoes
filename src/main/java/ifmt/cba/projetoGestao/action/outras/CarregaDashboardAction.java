@@ -1,5 +1,8 @@
 package ifmt.cba.projetoGestao.action.outras;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,9 +25,15 @@ public class CarregaDashboardAction extends Action  {
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
 		
 		if (usuarioLogado.getPerfil().equals("ADMIN")) {
+			List<Usuario> usuarios = dao.lista("Usuario");
+			List<Usuario> usuariosAdmin = usuarios;
+			
+			usuariosAdmin.removeIf(u -> u.getPerfil().equals("PADRÃO"));
+			
+			request.setAttribute("usuariosAdmin", usuariosAdmin);
 			request.setAttribute("solicitacoes", dao.lista("Solicitacao"));
 			request.setAttribute("departamentos", dao.lista("Departamento"));
-			request.setAttribute("usuarios", dao.lista("Usuario"));
+			request.setAttribute("usuarios",usuarios);
 			return mapping.findForward("dashboardAdmin");
 		} else {
 			request.setAttribute("solicitacoes", dao.lista("Solicitacao"));
