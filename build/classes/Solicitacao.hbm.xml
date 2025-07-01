@@ -12,7 +12,10 @@
         <property name="descricao" column="descricao"/>
         <property name="data_criacao" column="data_criacao"/>
         <property name="status" column="status"/>
-        <many-to-one name="solicitante" class="ifmt.cba.projetoGestao.model.Usuario" column="usuario_id" not-null="true"></many-to-one>
-		<many-to-one name="departamento_responsavel" class="ifmt.cba.projetoGestao.model.Departamento" column="departamento_id" not-null="true"></many-to-one>
+        <many-to-one name="solicitante" class="ifmt.cba.projetoGestao.model.Usuario" column="usuario_id"></many-to-one>
+		<many-to-one name="departamento_responsavel" class="ifmt.cba.projetoGestao.model.Departamento" column="departamento_id"></many-to-one>
     </class>
 </hibernate-mapping>
+
+
+<!-- configurar o cascade pra deletar -->

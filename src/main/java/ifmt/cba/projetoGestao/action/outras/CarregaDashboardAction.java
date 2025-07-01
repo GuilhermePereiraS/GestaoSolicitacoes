@@ -26,7 +26,7 @@ public class CarregaDashboardAction extends Action  {
 		
 		if (usuarioLogado.getPerfil().equals("ADMIN")) {
 			List<Usuario> usuarios = dao.lista("Usuario");
-			List<Usuario> usuariosAdmin = usuarios;
+			List<Usuario> usuariosAdmin = new ArrayList(usuarios);
 			
 			usuariosAdmin.removeIf(u -> u.getPerfil().equals("PADRÃO"));
 			

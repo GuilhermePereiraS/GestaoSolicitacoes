@@ -7,7 +7,7 @@
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/gestaodb</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">admin</property>
+    <property name="hibernate.connection.password">postgres</property>
 
     <property name="hibernate.dialect">net.sf.hibernate.dialect.PostgreSQLDialect</property>
 
@@ -19,5 +19,8 @@
     <mapping resource="Usuario.hbm.xml"/>
     <mapping resource="Departamento.hbm.xml"/>
     <mapping resource="Solicitacao.hbm.xml"/>
+    
+    <!-- configurar o cascade pra deletar -->
+    
   </session-factory>
 </hibernate-configuration>

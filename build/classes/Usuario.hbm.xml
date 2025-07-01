@@ -12,5 +12,7 @@
         <property name="login" column="login"/>
         <property name="senha" column="senha"/>
         <property name="perfil" column="perfil"/>
+        
+       
     </class>
 </hibernate-mapping>

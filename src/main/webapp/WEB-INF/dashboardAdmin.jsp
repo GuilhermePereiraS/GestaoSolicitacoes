@@ -227,12 +227,12 @@ select:focus {
 					<td data-id="${solicitacao.solicitante.id}"><c:out value="${solicitacao.solicitante.nome}"></c:out></td>
 					<td><fmt:formatDate value="${solicitacao.data_criacao}" pattern="dd/MM/yyyy" /></td>
 					<td><c:out value="${solicitacao.status}"></c:out></td>
-					<td style="display: none;"><c:out value="${solicitacao.id}"></c:out></td>
+					<td style="display: none;" class="idSolicitacao"><c:out value="${solicitacao.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
 				        <div class="menu-popup">
 				            <a href="#" class="editarSolicitacaoLink">Editar</a>
-				            <a href="#">Excluir</a>
+				            <a href="#" class="exluirLink">Excluir</a>
 				        </div>
     				</td>	
 				</tr>
@@ -267,12 +267,12 @@ select:focus {
 					<td><c:out value="${usuario.nome}"></c:out></td>
 					<td><c:out value="${usuario.login}"></c:out></td>
 					<td ><c:out value="${usuario.perfil}"></c:out></td>
-					<td style="display: none;"><c:out value="${usuario.id}"></c:out></td>
+					<td style="display: none;" class="idUsuario"><c:out value="${usuario.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
 				        <div class="menu-popup">
 				            <a href="#" class="editarUsuarioLink">Editar</a>
-				            <a href="#">Excluir</a>
+				            <a href="#" class="exluirLink">Excluir</a>
 				        </div>
     				</td>	
 				</tr>
@@ -314,12 +314,12 @@ select:focus {
 				<tr>
 					<td><c:out value="${departamento.nome}"></c:out></td>
 					<td data-id="${departamento.responsavel.id}"><c:out value="${departamento.responsavel.nome}"></c:out></td>
-					<td style="display: none;"><c:out value="${departamento.id}"></c:out></td>
+					<td style="display: none;" class="idDepartamento"><c:out value="${departamento.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
 				        <div class="menu-popup">
 				            <a href="#" class="editarDepartamentoLink">Editar</a>
-				            <a href="#">Excluir</a>
+				            <a href="#" class="exluirLink">Excluir</a>
 				        </div>
     				</td>	
 				</tr>
@@ -349,7 +349,46 @@ select:focus {
 	  <input type="hidden" name="id" />
 	</form>
 	
+	<form class="formExclusao" method="post" action="/excluiDepartamento.do" style="display: none;">
+	  <input type="hidden" name="id" />
+	  <input type="hidden" name="tipo" />
+	</form>
+	
 	<script>
+	
+	document.querySelectorAll(".exluirLink").forEach(link => {
+		link.addEventListener('click',function(e) {
+			e.preventDefault();
+			const tr = this.closest('tr');
+			const tds = tr.querySelectorAll('td');
+			
+			const form = document.querySelector(".formExclusao");
+			const id = form.querySelector('[name="id"]');
+			const tipo = form.querySelector('[name="tipo"]');
+			
+			for (const td of tds) {
+				if (td.classList.contains("idUsuario") ) {
+					id.value = td.textContent.trim();
+					tipo.value = "Usuario";
+					form.submit();
+					break;
+				} else if (td.classList.contains("idDepartamento")) {
+					id.value = td.textContent.trim();
+					tipo.value = "Departamento"; 
+					form.submit();
+					break;
+				} else if (td.classList.contains("idSolicitacao")) {
+					id.value = td.textContent.trim();
+					tipo.value = "Solicitacao"; 
+					form.submit();
+					break;
+				}
+			}
+			
+			
+		 }); // 
+	});
+	
 	formularios = document.querySelectorAll(".formularioAdiciona");
 	document.querySelectorAll(".botaoAdicionar").forEach(button => {
 	    button.addEventListener("click", () => {
@@ -412,6 +451,9 @@ select:focus {
 			})
 		})
 	})
+	
+			
+			
 	
 	//usuario
 	document.querySelectorAll(".editarUsuarioLink").forEach(link => {

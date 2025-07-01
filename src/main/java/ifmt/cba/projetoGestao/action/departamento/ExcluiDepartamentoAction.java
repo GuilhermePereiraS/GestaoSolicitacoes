@@ -8,15 +8,21 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import ifmt.cba.projetoGestao.DAO.Dao;
+
 public class ExcluiDepartamentoAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		String usuario = "admin";
-		if (usuario.equals("admin")) {
-			return mapping.findForward("dashBoardAdmin");
-		} else {
-			return mapping.findForward("dashBoardPadrao");
-		}
+		Dao dao = new Dao();
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		String tipo = request.getParameter("tipo");
+		
+		Object objeto = dao.buscaPorId(tipo, id);
+		
+		dao.deleta(objeto);
+		
+		return mapping.findForward("dashBoardAdmin");
 	}
 }
