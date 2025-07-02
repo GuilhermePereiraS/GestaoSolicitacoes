@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+ 	<form-beans>
+        <form-bean name="loginForm" type="ifmt.cba.projetoGestao.form.LoginForm"/> 
+        <form-bean name="cadastroForm" type="ifmt.cba.projetoGestao.form.CadastroForm"/> 
+        
+        <form-bean name="solicitacaoTabelaForm" type="ifmt.cba.projetoGestao.form.SolicitacaoTabelaForm"/>
+        <form-bean name="usuarioTabelaForm" type="ifmt.cba.projetoGestao.form.UsuarioTabelaForm"/>
+        <form-bean name="departamentoTabelaForm" type="ifmt.cba.projetoGestao.form.DepartamentoTabelaForm"/>
+    </form-beans>
+
+	<action-mappings>
+	
+		<!-- Outras -->
+			<action 
+			path="/carregaDashboard"
+			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardAction"
+			scope="request">
+			<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp"/>
+			<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp"/>
+		</action>
+	
+		<!-- Usuario -->
+		<action 
+			path="/autenticaUsuario"
+			type="ifmt.cba.projetoGestao.action.usuario.AutenticaUsuarioAction"
+			scope="request"
+			name="loginForm">
+			
+			<forward name="paginaInicial" path="/login.jsp"/>
+			<forward name="carregaDashboard" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/cadastraUsuario"
+			type="ifmt.cba.projetoGestao.action.usuario.CadastraUsuarioAction"
+			scope="request"
+			name="cadastroForm">
+			<forward name="paginaInicial" path="/login.jsp"/>
+			<forward name="dashBoardPadrao" path="/carregaDashboard.do"/>
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/atualizaUsuario"
+			type="ifmt.cba.projetoGestao.action.usuario.AtualizaUsuarioAction"
+			scope="request"
+			name="usuarioTabelaForm">
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/excluiUsuario"
+			type="ifmt.cba.projetoGestao.action.usuario.ExcluiUsuarioAction"
+			scope="request"
+			name="usuarioTabelaForm">
+			<forward name="dashBoardPadrao" path="/carregaDashboard.do"/>
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<!-- Departamento -->
+		<action 
+			path="/adicionaDepartamento"
+			type="ifmt.cba.projetoGestao.action.departamento.AdicionaDepartamentoAction"
+			scope="request"
+			name="departamentoTabelaForm">
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/atualizaDepartamento"
+			type="ifmt.cba.projetoGestao.action.departamento.AtualizaDepartamentoAction"
+			scope="request"
+			name="departamentoTabelaForm">
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/excluiDepartamento"
+			type="ifmt.cba.projetoGestao.action.departamento.ExcluiDepartamentoAction"
+			scope="request"
+			name="departamentoTabelaForm">
+			<forward name="dashBoardPadrao" path="/carregaDashboard.do"/>
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<!-- Solicitação -->
+		<action 
+			path="/adicionaSolicitacao"
+			type="ifmt.cba.projetoGestao.action.solicitacao.AdicionaSolicitacaoAction"
+			scope="request"
+			name="solicitacaoTabelaForm">
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/atualizaSolicitacao"
+			type="ifmt.cba.projetoGestao.action.solicitacao.AtualizaSolicitacaoAction"
+			scope="request"
+			name="solicitacaoTabelaForm">
+			<forward name="dashBoard" path="/carregaDashboard.do"/>
+		</action>
+		
+		<action 
+			path="/excluiSolicitacao"
+			type="ifmt.cba.projetoGestao.action.solicitacao.ExcluiSolicitacaoAction"
+			scope="request"
+			name="solicitacaoTabelaForm">
+			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+		</action>
+		
+	</action-mappings>
+    
+</struts-config>

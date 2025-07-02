@@ -16,6 +16,3 @@
 		<many-to-one name="departamento_responsavel" class="ifmt.cba.projetoGestao.model.Departamento" column="departamento_id"></many-to-one>
     </class>
 </hibernate-mapping>
-
-
-<!-- configurar o cascade pra deletar -->
