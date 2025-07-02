@@ -8,15 +8,22 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import ifmt.cba.projetoGestao.DAO.Dao;
+import ifmt.cba.projetoGestao.model.Departamento;
+import ifmt.cba.projetoGestao.model.Usuario;
+
 public class AtualizaDepartamentoAction extends Action  {
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		String usuario = "admin";
-		if (usuario.equals("admin")) {
-			return mapping.findForward("dashBoardAdmin");
-		} else {
-			return mapping.findForward("dashBoardPadrao");
-		}
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			Dao dao = new Dao();
+			Departamento departamento = (Departamento) dao.buscaPorId("Departamento", Integer.parseInt(request.getParameter("id")));
+			Usuario usuarioResponsavel = (Usuario) dao.buscaPorId("Usuario", Integer.parseInt(request.getParameter("usuarioResponsavelId")));
+			
+			departamento.setNome(request.getParameter("nome"));
+			departamento.setResponsavel(usuarioResponsavel);
+			
+			dao.edita(departamento);
+			
+			
+			return mapping.findForward("dashboard");
 	}
 }

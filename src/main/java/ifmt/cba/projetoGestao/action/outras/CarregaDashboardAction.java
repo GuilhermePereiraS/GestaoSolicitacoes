@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import ifmt.cba.projetoGestao.DAO.Dao;
+import ifmt.cba.projetoGestao.model.Departamento;
 import ifmt.cba.projetoGestao.model.Usuario;
 
 public class CarregaDashboardAction extends Action  {
@@ -24,19 +25,22 @@ public class CarregaDashboardAction extends Action  {
 		HttpSession session = request.getSession();
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
 		
+		List<Usuario> usuarios = dao.lista("Usuario");
+		List<Usuario> usuariosAdmin = new ArrayList(usuarios);
+		List<Departamento> departamentos = dao.lista("Departamento");
+		
+		usuariosAdmin.removeIf(u -> u.getPerfil().equals("PADRÃO"));
+		
 		if (usuarioLogado.getPerfil().equals("ADMIN")) {
-			List<Usuario> usuarios = dao.lista("Usuario");
-			List<Usuario> usuariosAdmin = new ArrayList(usuarios);
-			
-			usuariosAdmin.removeIf(u -> u.getPerfil().equals("PADRÃO"));
 			
 			request.setAttribute("usuariosAdmin", usuariosAdmin);
 			request.setAttribute("solicitacoes", dao.lista("Solicitacao"));
-			request.setAttribute("departamentos", dao.lista("Departamento"));
+			request.setAttribute("departamentos", departamentos);
 			request.setAttribute("usuarios",usuarios);
 			return mapping.findForward("dashboardAdmin");
 		} else {
 			request.setAttribute("solicitacoes", dao.lista("Solicitacao"));
+			request.setAttribute("departamentos", departamentos);
 			return mapping.findForward("dashboardPadrao");
 		}
 	}

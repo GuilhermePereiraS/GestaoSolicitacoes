@@ -3,6 +3,7 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+    <%@ taglib prefix="box" uri="/WEB-INF/bomboxCustomTag.tld" %>
     <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -153,15 +154,42 @@
         background-color: #4b08a8;
     }
 
+select {
+ 	margin-bottom: 	5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+    appearance: none; /* remove aparência nativa (no Firefox) */
+    -webkit-appearance: none; /* remove aparência nativa (no Chrome) */
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%235b10c4' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-width: 150px;
+}
+
+select:focus {
+    border-color: #5b10c4;
+    box-shadow: 0 0 0 2px rgba(91, 16, 196, 0.2);
+    outline: none;
+}
+
 </style>
 </head>
 <body>
 
 	<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
+	
 	<div class="formularioAdiciona" style="display: block;">
 		<html:form action="/adicionaSolicitacao">
 		  <label>Departamento responsavel:</label><br>
-		  <input type="text" name="departamentoResponsavel"/><br>
+		  <box:bombox atributoName="departamentoResponsavel" lista="${departamentos}"/><br>
 		  <label>Titulo:</label><br>
 		  <html:text property="titulo" /><br>
 		  <label>Descrição:</label><br>
@@ -200,12 +228,12 @@
 					<td data-id="${solicitacao.solicitante.id}"><c:out value="${solicitacao.solicitante.nome}"></c:out></td>
 					<td><fmt:formatDate value="${solicitacao.data_criacao}" pattern="dd/MM/yyyy" /></td>
 					<td><c:out value="${solicitacao.status}"></c:out></td>
-					<td style="display: none;"><c:out value="${solicitacao.id}"></c:out></td>
+					<td class = "idSolicitacao" style="display: none;"><c:out value="${solicitacao.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible;">
 				        <button class="menu-btn">⋯</button>
 				        <div class="menu-popup">
 				            <a href="#" class="editarLink">Editar</a>
-				            <a href="#">Excluir</a>
+				            <a href="#" class="exluirLink">Excluir</a>
 				        </div>
     				</td>	
 				</tr>
@@ -224,7 +252,46 @@
 	  <input type="hidden" name="departamentoResponsavelId" />
 	</form>
 
+	<form class="formExclusao" method="post" action="/exclui.do" style="display: none;">
+	  <input type="hidden" name="id" />
+	  <input type="hidden" name="tipo" />
+	</form>
+
 <script>
+
+document.querySelectorAll(".exluirLink").forEach(link => {
+	link.addEventListener('click',function(e) {
+		e.preventDefault();
+		console.log("asda")
+		const tr = this.closest('tr');
+		const tds = tr.querySelectorAll('td');
+		
+		const form = document.querySelector(".formExclusao");
+		const id = form.querySelector('[name="id"]');
+		const tipo = form.querySelector('[name="tipo"]');
+		
+		for (const td of tds) {
+			if (td.classList.contains("idUsuario") ) {
+				id.value = td.textContent.trim();
+				tipo.value = "Usuario";
+				form.submit();
+				break;
+			} else if (td.classList.contains("idDepartamento")) {
+				id.value = td.textContent.trim();
+				tipo.value = "Departamento"; 
+				form.submit();
+				break;
+			} else if (td.classList.contains("idSolicitacao")) {
+				id.value = td.textContent.trim();
+				tipo.value = "Solicitacao"; 
+				form.submit();
+				break;
+			}
+		}
+		
+		
+	 }); // 
+});
 
 document.querySelector(".botaoAdicionar").addEventListener("click", ()=> {
 	document.querySelector(".formularioAdiciona").style.display = document.querySelector(".formularioAdiciona").style.display == "block" ? "none" : "block" 
@@ -251,7 +318,15 @@ document.querySelectorAll(".editarLink").forEach(link => {
 		tdParaInput(tds[2]);
 		tdParaInput(tds[3]);
 		tdParaInput(tds[4]); // mudar para caixa de calendario
-		tdParaInput(tds[5]); // mudar para bombox
+		
+		tds[5].innerHTML = `
+			<select>
+				<option disabled selected >----</option>
+				<option>ABERTA</option>
+				<option>EM ANDAMENTO</option>
+				<option>FINALIZADA</option>
+			</select>
+		`
 		
 		let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;
 		botaoSalvar = tr.querySelector("button");
@@ -261,7 +336,7 @@ document.querySelectorAll(".editarLink").forEach(link => {
 			const descricao = tds[2].querySelector('input').value;
 			const solicitanteId = tds[3].getAttribute("data-id");
 			const dataCriacao = tds[4].querySelector('input').value;
-			const status = tds[5].querySelector('input').value;
+			const status = tds[5].querySelector('select').value;
 			const id = tds[6].textContent;
 			
 			const form = document.querySelector(".formEdicao");

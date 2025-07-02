@@ -1,0 +1,11 @@
+1. adicionar as bomboxes necessarias
+2. bloquar a exclusão de admins por admins, admins so podem excluir as proprias contas
+3. criar a taglib de popup de mensagem
+4. adicionar popup de mensagem quando um usuario for cadastrado com sucesso e quando der erro
+12. popup de mensagem quando ---- for enviado
+9. trocar de dashBoard pra dashboard em todos os mapeamentos e actions
+6. trocar todos as referencias de dashboardAdmin pra dashboard no mapeamento e nas actions
+7. melhorar a criptografia
+8. conexoes nao estao sendo fechadas, manutenção no gerenciamento de conexções
+10.mudar o status das solicitacoes pra pontinhos coloridos, azul= "ABERTA", roxo="EM ANDAMENTO", verde="FINALIZADA"
+11. Usuarios so poderão excluir suas proprias solicitacoes, a nao ser que sejam admin

@@ -345,11 +345,11 @@ select:focus {
 	
 	<form class="formDepartamentoEdicao" method="post" action="/atualizaDepartamento.do" style="display: none;">
 	  <input type="hidden" name="nome" />
-	  <input type="hidden" name="departamentoResponsavelId" />
+	  <input type="hidden" name="usuarioResponsavelId" />
 	  <input type="hidden" name="id" />
 	</form>
 	
-	<form class="formExclusao" method="post" action="/excluiDepartamento.do" style="display: none;">
+	<form class="formExclusao" method="post" action="/exclui.do" style="display: none;">
 	  <input type="hidden" name="id" />
 	  <input type="hidden" name="tipo" />
 	</form>
@@ -520,10 +520,10 @@ select:focus {
 	            td.appendChild(input);
 	        }
 			
-			tdParaInput(tds[0]); // mudar para bombox
+			tdParaInput(tds[0]); 
 			
 			tds[1].innerHTML = `
-				<box:bombox atributoName="usuario" lista="${usuariosAdmin}"/>
+				<box:bombox atributoName="usuario" lista="${usuarios}"/>
 			`
 			
 			
@@ -531,16 +531,12 @@ select:focus {
 			botaoSalvar = tr.querySelector("button");
 			botaoSalvar.addEventListener('click', ()=> {
 				const nome = tds[0].querySelector('input').value;
-				const departamentoResponsavelId = tds[1].value;
-				const descricao = tds[2].querySelector('input').value;
-				const solicitanteId = tds[3].getAttribute("data-id");
-				const dataCriacao = tds[4].querySelector('input').value;
-				const status = tds[5].querySelector('input').value;
-				const id = tds[6].textContent;
+				const usuarioResponsavelId = tds[1].querySelector('select').value;
+				const id = tds[2].textContent;
 				
-				const form = document.querySelector(".formEdicao");
-				form.querySelector('[name="nome"]').value= departamentoResponsavelId;
-				form.querySelector('[name="departamentoResponsavelId"]').value= titulo;
+				const form = document.querySelector(".formDepartamentoEdicao");
+				form.querySelector('[name="nome"]').value= nome;
+				form.querySelector('[name="usuarioResponsavelId"]').value= usuarioResponsavelId;
 				form.querySelector('[name="id"]').value= id;
 				
 				form.submit();

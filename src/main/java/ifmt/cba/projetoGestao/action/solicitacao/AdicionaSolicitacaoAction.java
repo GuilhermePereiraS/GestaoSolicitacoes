@@ -35,10 +35,9 @@ public class AdicionaSolicitacaoAction extends Action  {
 		solicitacao.setTitulo(formPreenchido.getTitulo());
 		solicitacao.setDescricao(formPreenchido.getDescricao());
 		solicitacao.setSolicitante(usuarioLogado);
-		solicitacao.setStatus("PROCESSO");
+		solicitacao.setStatus("ABERTA");
 		for (Departamento d : listaD) {
-			if (d.getNome().toUpperCase().equals(request.getParameter("departamentoResponsavel").toUpperCase())) {
-					
+			if (d.getId() == Integer.parseInt(request.getParameter("departamentoResponsavel"))) {
 				solicitacao.setDepartamento_responsavel(d);
 			}
 		}

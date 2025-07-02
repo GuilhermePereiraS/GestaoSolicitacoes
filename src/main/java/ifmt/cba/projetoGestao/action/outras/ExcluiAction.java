@@ -1,4 +1,4 @@
-package ifmt.cba.projetoGestao.action.departamento;
+package ifmt.cba.projetoGestao.action.outras;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import ifmt.cba.projetoGestao.DAO.Dao;
 
-public class ExcluiDepartamentoAction extends Action  {
+public class ExcluiAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		

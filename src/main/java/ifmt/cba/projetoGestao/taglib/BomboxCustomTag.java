@@ -32,7 +32,8 @@ public class BomboxCustomTag extends TagSupport {
 			JspWriter out = pageContext.getOut();
 			List<String> listaDeNomes = pegaNomes(lista);
 			List<Integer> listaDeIds = pegaIds(lista);
-			out.write("<select name='" + atributoName + "'>");
+			out.write("<select required name='" + atributoName + "' >");
+			out.write("<option disabled selected >----</option>");
 			int i = 0;
 			for (String nome : listaDeNomes) {
 				out.write("<option value='" + listaDeIds.get(i) + "'>"+ nome +"</option>");
