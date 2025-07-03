@@ -9,6 +9,6 @@
             <generator class="sequence"/>
         </id>
         <property name="nome" column="nome"/>
-        <many-to-one name="responsavel" class="ifmt.cba.projetoGestao.model.Usuario" column="usuario_id"></many-to-one>
+        <many-to-one name="responsavel" class="ifmt.cba.projetoGestao.model.Usuario" column="usuario_id" not-null="true"></many-to-one>
     </class>
 </hibernate-mapping>

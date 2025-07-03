@@ -121,9 +121,12 @@
 <body>
 	
 	<div class="notificacoes">
-	<not:notificacao tipoAlerta="Aviso">Usuario não encontrado</not:notificacao>
-	<not:notificacao tipoAlerta="Aviso">efwefwfwef</not:notificacao>	
-	
+		<c:if test="${loginNaoEncontrado}">
+			<not:notificacao tipoAlerta="Aviso">Usuario não encontrado</not:notificacao>
+		</c:if>
+		<c:if test="${senhaIncorreta}">
+			<not:notificacao tipoAlerta="Aviso">Senha incorreta</not:notificacao>
+		</c:if>	
 	</div>
 	
 	

@@ -25,23 +25,23 @@ public class AutenticaUsuarioAction extends Action  {
 		Usuario usuarioLogado = null;
 		String senhaCriptografada = CriptografiaUtil.criptografa(formPreechido.getSenha());
 		
+		Boolean loginNaoEncontrado = true;
+		Boolean senhaIncorreta = true;
 		
 		
 		for (Usuario u : ListaUsuario) {
 			if (u.getLogin().equals(formPreechido.getLogin())) {
-				//desativa uma flag usuario não encontrado
+				loginNaoEncontrado = false;
+				request.setAttribute("senhaIncorreta", senhaIncorreta);
 				if (u.getSenha().equals(senhaCriptografada)) {
-					//desativa a flag senha não encontrada
+					senhaIncorreta = false;
 					usuarioLogado = u;
 					break;
-				} else {
-					//ativa alguma flag
-				}
-				
-			} else {
-				
-			}
+				} 
+			} 
 		}
+		
+		request.setAttribute("loginNaoEncontrado", loginNaoEncontrado);
 		
 		if (usuarioLogado != null) {
 			HttpSession session = request.getSession();

@@ -44,7 +44,7 @@ public class NotificacaoTag extends BodyTagSupport {
 		}
 	
 		try {
-			corpo = "<div class='aviso' transition: 2s; style='min-width: 15cm; top: 10px; left: 50%; transform: translateX(-50%); text-align:center; color:white;"
+			corpo = "<div class='aviso' transition: 2s; style='min-width: 25rem; top: 10px; text-align:center; color:white;"
 					+ 
 					tipoAlerta
 					+ "</div>";
