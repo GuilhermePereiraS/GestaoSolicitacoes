@@ -1,5 +1,3 @@
-1. adicionar as bomboxes necessarias
-2. bloquar a exclusão de admins por admins, admins so podem excluir as proprias contas
 3. criar a taglib de popup de mensagem
 4. adicionar popup de mensagem quando um usuario for cadastrado com sucesso e quando der erro
 12. popup de mensagem quando ---- for enviado

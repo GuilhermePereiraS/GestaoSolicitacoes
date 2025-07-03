@@ -313,7 +313,10 @@ document.querySelectorAll(".editarLink").forEach(link => {
             td.appendChild(input);
         }
 		
-		tdParaInput(tds[0]); // mudar para bombox
+		tds[0].innerHTML = `
+			<box:bombox atributoName="departamento" lista="${departamentos}"/>
+		`
+		
 		tdParaInput(tds[1]);
 		tdParaInput(tds[2]);
 		tdParaInput(tds[3]);
@@ -331,7 +334,7 @@ document.querySelectorAll(".editarLink").forEach(link => {
 		let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;
 		botaoSalvar = tr.querySelector("button");
 		botaoSalvar.addEventListener('click', ()=> {
-			const departamentoResponsavelId = tds[0].getAttribute("data-id");
+			const departamentoResponsavelId = tds[0].querySelector('select').value
 			const titulo = tds[1].querySelector('input').value;
 			const descricao = tds[2].querySelector('input').value;
 			const solicitanteId = tds[3].getAttribute("data-id");

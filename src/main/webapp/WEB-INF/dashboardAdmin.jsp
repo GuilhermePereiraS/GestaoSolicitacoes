@@ -188,7 +188,7 @@ select:focus {
 	<div class="formularioAdiciona" style="display: none;">
 		<html:form action="/adicionaSolicitacao">
 		  <label>Departamento responsavel:</label><br>
-		  <input type="text" name="departamentoResponsavel"/><br>
+		  <box:bombox atributoName="departamentoResponsavel" lista="${departamentos}"/><br>
 		  <label>Titulo:</label><br>
 		  <html:text property="titulo" /><br>
 		  <label>Descrição:</label><br>
@@ -271,8 +271,10 @@ select:focus {
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
 				        <div class="menu-popup">
-				            <a href="#" class="editarUsuarioLink">Editar</a>
-				            <a href="#" class="exluirLink">Excluir</a>
+				            <c:if test="${ usuario.perfil != 'ADMIN' || usuarioLogado.id == usuario.id}">
+				            	<a href="#" class="editarUsuarioLink">Editar</a>
+				            	<a href="#" class="exluirLink">Excluir</a>
+				            </c:if>
 				        </div>
     				</td>	
 				</tr>
