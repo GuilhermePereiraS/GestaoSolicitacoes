@@ -1,13 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>   
-
+<%@ taglib prefix="not" uri="/WEB-INF/notificacaoTag.tld" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
 <style>
+
+.aviso {
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+}
+
+.aviso button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+.aviso button:hover {
+  background-color: #ddd;
+}
+
     body {
         font-family: Arial, sans-serif;
         background: linear-gradient(135deg, #ece9e6, #ffffff);
@@ -74,9 +104,30 @@
         font-size: 0.9em;
         color: #555;
     }
+    
+    
+    .notificacoes {
+    	top: 10px;
+    	left: 50%;
+    	transform: translate(-50%);
+    	position: fixed;
+    	display: flex;
+    	flex-direction: column;
+    	gap: 1rem;
+    }
+    
 </style>
 </head>
 <body>
+	
+	<div class="notificacoes">
+	<not:notificacao tipoAlerta="Aviso">Usuario não encontrado</not:notificacao>
+	<not:notificacao tipoAlerta="Aviso">efwefwfwef</not:notificacao>	
+	
+	</div>
+	
+	
+	
 	<html:form action="/autenticaUsuario">
 	<label>Usuario:</label><br>
 	<html:text property="login"/><br>

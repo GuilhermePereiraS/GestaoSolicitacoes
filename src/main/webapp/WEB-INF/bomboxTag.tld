@@ -7,11 +7,11 @@
 
     <tlib-version>1.0</tlib-version>
     <short-name>bombox</short-name>
-    <uri>http://example.com/tags/bomboxCustomTag</uri>
+    <uri>http://example.com/tags/bomboxTag</uri>
 
     <tag>
         <name>bombox</name>
-        <tag-class>ifmt.cba.projetoGestao.taglib.BomboxCustomTag</tag-class>
+        <tag-class>ifmt.cba.projetoGestao.taglib.BomboxTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>

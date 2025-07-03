@@ -9,7 +9,7 @@ import java.util.List;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-public class BomboxCustomTag extends TagSupport {
+public class BomboxTag extends TagSupport {
 	private List<Object> lista;
 	private String atributoName;
 		

@@ -6,24 +6,20 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>bombox</short-name>
-    <uri>http://example.com/tags/bomboxCustomTag</uri>
+    <short-name>not</short-name>
+    <uri>http://example.com/tags/notificacaoTag</uri>
 
     <tag>
-        <name>bombox</name>
-        <tag-class>ifmt.cba.projetoGestao.taglib.BomboxCustomTag</tag-class>
-        <body-content>empty</body-content>
+        <name>notificacao</name>
+        <tag-class>ifmt.cba.projetoGestao.taglib.NotificacaoTag</tag-class>
+        <body-content>JSP</body-content>
 
         <attribute>
-            <name>lista</name>
+            <name>tipoAlerta</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         
-               <attribute>
-            <name>atributoName</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
+        
     </tag>
 </taglib>

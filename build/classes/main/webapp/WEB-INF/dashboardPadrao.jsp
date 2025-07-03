@@ -1,16 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-    <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-    <%@ taglib prefix="box" uri="/WEB-INF/bomboxCustomTag.tld" %>
-    <%@ page isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib prefix="box" uri="/WEB-INF/bomboxTag.tld" %>
+<%@ taglib prefix="not" uri="/WEB-INF/notificacaoTag.tld" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Dashboard</title>
 <style>
+.aviso {
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+}
+
+.aviso button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+.aviso button:hover {
+  background-color: #ddd;
+}
+
     body {
         font-family: Arial, sans-serif;
         background-color: #f5f4fa;
@@ -183,6 +211,8 @@ select:focus {
 </style>
 </head>
 <body>
+
+	<not:notificacao tipoAlerta="Erro">Erro</not:notificacao>
 
 	<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
 	
