@@ -23,6 +23,8 @@ public class ExcluiAction extends Action  {
 		
 		Object objeto = dao.buscaPorId(tipo, id);
 		
+		
+		
 		try {
 			dao.deleta(objeto);			
 		} catch (ErroDeViolacaoConstraint e) {

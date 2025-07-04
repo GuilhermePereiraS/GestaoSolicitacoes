@@ -39,7 +39,7 @@ ON DELETE SET NULL;
 
 ALTER TABLE solicitacoes
 ADD CONSTRAINT fk_departamentos
-FOREIGN KEY (departamento_id)
+FOREIGN KEY (departamento_id)	
 REFERENCES departamentos(id)
 ON DELETE CASCADE;
 
