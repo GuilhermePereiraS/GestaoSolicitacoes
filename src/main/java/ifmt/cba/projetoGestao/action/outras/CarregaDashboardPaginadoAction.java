@@ -28,11 +28,20 @@ public class CarregaDashboardPaginadoAction extends Action  {
 		
 		int itemsPorPagina = 5;
 		
+		
 		if (usuarioLogado.getPerfil().equals("ADMIN")) {
 			
-			int paginaAtualUsuario = Integer.parseInt(request.getParameter("paginaUsuario"));
-			int paginaAtualSolicitacao = Integer.parseInt(request.getParameter("paginaSolicitacao"));
-			int paginaAtualDepartamento = Integer.parseInt(request.getParameter("paginaDepartamento"));
+			int paginaAtualUsuario = request.getParameter("pageUsuario") != null 
+				    ? Integer.parseInt(request.getParameter("pageUsuario")) 
+				    : 1;
+
+				int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null 
+				    ? Integer.parseInt(request.getParameter("pageSolicitacao")) 
+				    : 1;
+
+				int paginaAtualDepartamento = request.getParameter("pageDepartamento") != null 
+				    ? Integer.parseInt(request.getParameter("pageDepartamento")) 
+				    : 1;
 			
 			
 			int totalPaginasUsuario = (int) Math.ceil((double) dao.contarTotal("Usuario"));
@@ -64,7 +73,7 @@ public class CarregaDashboardPaginadoAction extends Action  {
 			request.setAttribute("usuarios",usuarios);
 			return mapping.findForward("dashboardAdmin");
 		} else {
-			int paginaAtualSolicitacao = Integer.parseInt(request.getParameter("paginaSolicitacao"));
+			int paginaAtualSolicitacao = Integer.parseInt(request.getParameter("pageSolicitacao"));
 			int totalPaginasSolicitacao = (int) Math.ceil((double) dao.contarTotal("Solicitacao"));
 			
 			List<Departamento> departamentos = dao.lista("Departamento");

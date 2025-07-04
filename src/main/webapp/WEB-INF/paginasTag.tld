@@ -11,7 +11,7 @@
 
     <tag>
         <name>pagination</name>
-        <tag-class>ifmt.cba.projetoGestao.taglib.paginasTag</tag-class>
+        <tag-class>ifmt.cba.projetoGestao.taglib.PaginasTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>

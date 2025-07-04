@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-public class paginasTag extends TagSupport {
+public class PaginasTag extends TagSupport {
 	private String classe;
 	private int paginaAtual;
 	private int totalPaginas;

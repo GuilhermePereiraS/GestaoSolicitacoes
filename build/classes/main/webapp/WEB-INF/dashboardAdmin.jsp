@@ -241,6 +241,7 @@ select:focus {
 			</c:forEach> 
 		</tbody>
 	</table>
+	<pag:pagination totalPaginas="${totalPaginasSolicitacao}" classe="Usuario" paginaAtual="${paginaAtualUsuario}"/>
 	</div>
 	
 	<div>
