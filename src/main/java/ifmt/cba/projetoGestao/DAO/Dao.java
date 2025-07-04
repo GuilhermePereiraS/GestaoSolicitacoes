@@ -77,6 +77,45 @@ public class Dao {
 		return lista;
 	}
 	
+	public <t> List<t> listaPaginada(String nomeClasseObjeto, int itemsPorPagina, int paginaAtual) {
+		Session session = null;
+		List<t> lista = null;
+		
+		if (!nomeClasseObjeto.equals("Usuario") && !nomeClasseObjeto.equals("Departamento") &&  !nomeClasseObjeto.equals("Solicitacao")) {
+			System.err.println("Selecione uma opção valida: Usuario, Departamento ou Solicitacao");
+			return null;
+		}
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			Query query = session.createQuery("from " + nomeClasseObjeto);
+			
+			int primeiroRegistroDaPagina = (paginaAtual - 1) * itemsPorPagina;
+			
+			query.setFirstResult(primeiroRegistroDaPagina);
+			query.setMaxResults(itemsPorPagina);
+			
+			lista =(List<t>) query.list();
+			
+			if (lista.isEmpty()) {
+				System.out.println("Lista Vazia");
+			} 
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				if (session.isOpen()) {
+					try {
+						session.close();
+					} catch (HibernateException e) {
+						System.out.println("erro ao fechar a sessão: " + e.getMessage());
+					}
+				}
+			}
+		} 
+		return lista;
+	}
+	
 	public void edita(Object objeto) {
 		Transaction transaction = null;
 		Session session = null;

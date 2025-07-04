@@ -1,4 +1,4 @@
-3. criar a taglib de popup de mensagem
+12. paginação
 4. adicionar popup de mensagem quando um usuario for cadastrado com sucesso e quando der erro
 12. popup de mensagem quando ---- for enviado
 9. trocar de dashBoard pra dashboard em todos os mapeamentos e actions

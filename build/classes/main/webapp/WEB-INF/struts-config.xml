@@ -16,9 +16,18 @@
 	<action-mappings>
 	
 		<!-- Outras -->
-			<action 
+		
+	<!--	<action 
 			path="/carregaDashboard"
 			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardAction"
+			scope="request">
+			<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp" />
+			<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp" />
+		</action>   -->
+		
+		<action 
+			path="/carregaDashboard"
+			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardPaginadoAction"
 			scope="request">
 			<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp" />
 			<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp" />
