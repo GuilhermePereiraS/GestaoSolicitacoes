@@ -5,6 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="box" uri="/WEB-INF/bomboxTag.tld" %>
 <%@ taglib prefix="pag" uri="/WEB-INF/paginasTag.tld" %>
+<%@ taglib prefix="not" uri="/WEB-INF/notificacaoTag.tld" %>
 <%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
@@ -180,10 +181,30 @@ select:focus {
     input[type="submit"]:hover {
         background-color: #4b08a8;
     }
+    
+    .formularioDepartamento select {
+    	margin-bottom: 5px;
+    }
+    
+    .notificacoes {
+    	top: 10px;
+    	left: 50%;
+    	transform: translate(-50%);
+    	position: fixed;
+    	display: flex;
+    	flex-direction: column;
+    	gap: 1rem;
+    }
 
 </style>
 </head>
 <body>
+
+<div class="notificacoes">
+		<c:if test="${exclusaoDeUsuarioComUmDepartamento}">
+			<not:notificacao tipoAlerta="Erro">Usuario não encontrado</not:notificacao>
+		</c:if>
+	</div>
 
 	<div>
 	<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
@@ -200,7 +221,7 @@ select:focus {
 	</div>
 	</div>
 	<div>
-	<table>
+	<table style='margin-bottom: 5px;'>
 		<thead>
 			<tr>
 				<th>Departamento responsavel</th>
@@ -241,14 +262,14 @@ select:focus {
 			</c:forEach> 
 		</tbody>
 	</table>
-	<pag:pagination totalPaginas="${totalPaginasSolicitacao}" classe="Usuario" paginaAtual="${paginaAtualUsuario}"/>
+		<pag:pagination totalPaginas="${totalPaginasSolicitacao}" classe="Solicitacao" paginaAtual="${paginaAtualSolicitacao}"/>
 	</div>
 	
 	<div>
 	<h3>Usuarios </h3>
 	</div>
 		<div>
-	<table>
+	<table style='margin-bottom: 5px;'>
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -284,22 +305,23 @@ select:focus {
 			</c:forEach> 
 		</tbody>
 	</table>
+	<pag:pagination totalPaginas="${totalPaginasUsuario}" classe="Usuario" paginaAtual="${paginaAtualUsuario}"/>
 	</div>
 	
 	<div>
 	<h3>Departamentos <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
 		<div class="formularioAdiciona" style="display: none;">
-		<html:form action="/adicionaDepartamento">
+		<html:form action="/adicionaDepartamento" styleClass="formularioDepartamento">
 		  <label>Nome do departamento:</label><br>
 		  <input type="text" name="nome"/><br>
 		  <label>Reponsavel:</label><br>
-		  <input type="text" name="reponsavelNome"/><br> <!--  mudar pra bombox -->
+		  <box:bombox atributoName="responsavelId" lista="${todosUsuarios}"/><br>
 		  <html:submit value="Adicionar"/>
 		</html:form>
 		</div>
 		</div>
 	<div>
-	<table>
+	<table style='margin-bottom: 5px;'>
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -331,6 +353,7 @@ select:focus {
 			</c:forEach> 
 		</tbody>
 	</table>
+	<pag:pagination totalPaginas="${totalPaginasDepartamento}" classe="Departamento" paginaAtual="${paginaAtualDepartamento}"/>
 	</div>
 	
 	<form class="formSolicitacaoEdicao" method="post" action="/atualizaSolicitacao.do" style="display: none;">

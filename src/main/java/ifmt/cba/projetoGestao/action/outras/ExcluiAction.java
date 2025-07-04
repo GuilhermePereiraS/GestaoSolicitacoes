@@ -9,6 +9,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import ifmt.cba.projetoGestao.DAO.Dao;
+import ifmt.cba.projetoGestao.util.ErroDeViolacaoConstraint;
+import net.sf.hibernate.JDBCException;
 
 public class ExcluiAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -21,7 +23,12 @@ public class ExcluiAction extends Action  {
 		
 		Object objeto = dao.buscaPorId(tipo, id);
 		
-		dao.deleta(objeto);
+		try {
+			dao.deleta(objeto);			
+		} catch (ErroDeViolacaoConstraint e) {
+			System.out.println("aaa");
+			e.getCause();
+		}
 		
 		return mapping.findForward("dashBoardAdmin");
 	}

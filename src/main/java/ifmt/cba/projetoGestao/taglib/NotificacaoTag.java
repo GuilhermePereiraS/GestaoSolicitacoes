@@ -28,8 +28,9 @@ public class NotificacaoTag extends BodyTagSupport {
 		BodyContent body = getBodyContent();
 		String corpo = body.getString();
 		String sucessoConf = "background-color: #86eb34;'>" + corpo + "<br><button onclick=\"this.closest('.aviso').style.display='none'\">Ok</button>";  
-		String erroConf = "background-color: #eb3455;'>" + corpo + "<br><button onclick=\"window.location.href='/'\">Voltar pagina inicial</button>";  
 		String avisoConf = "background-color: #c6d61a;'>" + corpo + "<br><button onclick=\"this.closest('.aviso').style.display='none'\">Ok</button>";
+		String erroConf = "background-color: #eb3455;'>" + corpo + "<br><button onclick=\"this.closest('.aviso').style.display='none'\">Ok</button>";
+		/*String erroConf = "background-color: #eb3455;'>" + corpo + "<br><button onclick=\"window.location.href='/'\">Voltar pagina inicial</button>";  */
 		
 		switch (tipoAlerta) {
 		case "Sucesso":

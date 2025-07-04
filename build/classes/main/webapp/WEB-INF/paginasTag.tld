@@ -6,7 +6,7 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>paginacao</short-name>
+    <short-name>pag</short-name>
     <uri>http://example.com/tags/paginasTag</uri>
 
     <tag>

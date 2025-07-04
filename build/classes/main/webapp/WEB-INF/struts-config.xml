@@ -49,9 +49,7 @@
 			type="ifmt.cba.projetoGestao.action.usuario.CadastraUsuarioAction"
 			scope="request"
 			name="cadastroForm">
-			<forward name="paginaInicial" path="/login.jsp"/>
-			<forward name="dashBoardPadrao" path="/carregaDashboard.do"/>
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do"/>
+			<forward name="paginaInicial" path="/login.jsp" redirect="true"/>
 		</action>
 		
 		<action 

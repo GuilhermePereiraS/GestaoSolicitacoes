@@ -122,7 +122,7 @@
 	
 	<div class="notificacoes">
 		<c:if test="${loginNaoEncontrado}">
-			<not:notificacao tipoAlerta="Aviso">Usuario não encontrado</not:notificacao>
+			<not:notificacao tipoAlerta="Erro">Usuario não encontrado</not:notificacao>
 		</c:if>
 		<c:if test="${senhaIncorreta}">
 			<not:notificacao tipoAlerta="Aviso">Senha incorreta</not:notificacao>

@@ -7,7 +7,7 @@
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/gestaodb</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">guigui2006@</property>
+    <property name="hibernate.connection.password">postgres</property>
 
     <property name="hibernate.dialect">net.sf.hibernate.dialect.PostgreSQLDialect</property>
 
@@ -27,6 +27,9 @@ ADD CONSTRAINT fk_departamentos
 FOREIGN KEY (departamento_id)
 REFERENCES departamentos(id)
 ON DELETE SET NULL;
+
+ALTER TABLE solicitacoes DROP CONSTRAINT fk96c9c5e68df887cc;
+ALTER TABLE solicitacoes DROP CONSTRAINT fk96c9c5e682e69736;
 
 ALTER TABLE solicitacoes
 ADD CONSTRAINT fk_usuarios

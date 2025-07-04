@@ -15,5 +15,6 @@
         <property name="perfil" column="perfil"/>
 
 		
+		
     </class>
 </hibernate-mapping>

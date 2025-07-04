@@ -25,10 +25,10 @@ public class AdicionaDepartamentoAction extends Action  {
 		List<Usuario> listaU = dao.lista("Usuario");
 		
 		departamento.setNome(formPreenchido.getNome());
-		String responsavelFormNome = request.getParameter("reponsavelNome");
+		int responsavelFormId = Integer.parseInt(request.getParameter("responsavelId"));
 		
 		for (Usuario u : listaU) {
-			if (u.getNome().equals(responsavelFormNome)) {  //mudar pra id
+			if (u.getId() == responsavelFormId) {  
 				departamento.setResponsavel(u);
 			}
 		}

@@ -6,11 +6,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import ifmt.cba.projetoGestao.model.Usuario;
+import ifmt.cba.projetoGestao.util.ErroDeViolacaoConstraint;
 import ifmt.cba.projetoGestao.util.HibernateUtil;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
+import net.sf.hibernate.exception.ConstraintViolationException;
 
 public class Dao {
 	
@@ -212,6 +214,13 @@ public class Dao {
 			transaction = session.beginTransaction();
 			session.delete(objeto);
 			transaction.commit();
+		} catch (ConstraintViolationException e) {
+			try {
+				transaction.rollback();
+			} catch (HibernateException he) {
+				System.out.println("rollback da transação deu errado: " + he.getMessage());
+			}
+			throw new ErroDeViolacaoConstraint("erro, violação de constraint: ", e);
 		} catch (HibernateException e) {
 			System.out.println("Erro ao criar sessão: " + e.getMessage());
 			try {

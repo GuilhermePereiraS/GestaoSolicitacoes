@@ -208,6 +208,16 @@ select:focus {
     outline: none;
 }
 
+.notificacoes {
+    	top: 10px;
+    	left: 50%;
+    	transform: translate(-50%);
+    	position: fixed;
+    	display: flex;
+    	flex-direction: column;
+    	gap: 1rem;
+    }
+
 </style>
 </head>
 <body>
