@@ -1,4 +1,3 @@
-13. filtro por status e departamento
 4. adicionar popup de mensagem quando um usuario for cadastrado com sucesso e quando der erro
 14. popup quando usuario for desconectado
 12. popup de mensagem quando ---- for enviado
