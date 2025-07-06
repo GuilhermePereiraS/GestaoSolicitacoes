@@ -195,6 +195,11 @@ select:focus {
     	flex-direction: column;
     	gap: 1rem;
     }
+    
+    .filtroDiv {
+    	text-align: right;	
+    	margin-bottom:5px;
+    }
 
 </style>
 </head>
@@ -207,21 +212,36 @@ select:focus {
 	</div>
 
 	<div>
-	<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
-	<div class="formularioAdiciona" style="display: none;">
-		<html:form action="/adicionaSolicitacao">
-		  <label>Departamento responsavel:</label><br>
-		  <box:bombox atributoName="departamentoResponsavel" lista="${departamentos}"/><br>
-		  <label>Titulo:</label><br>
-		  <html:text property="titulo" /><br>
-		  <label>Descrição:</label><br>
-		  <html:text property="descricao" /><br>
-		  <html:submit value="Adicionar"/>
-		</html:form>
-	</div>
+		<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
+		<div class="formularioAdiciona" style="display: none;">
+			<html:form action="/adicionaSolicitacao">
+			  <label>Departamento responsavel:</label><br>
+			  <box:bombox atributoName="departamentoResponsavel" lista="${todosDepartamentos}"/><br>
+			  <label>Titulo:</label><br>
+			  <html:text property="titulo" /><br>
+			  <label>Descrição:</label><br>
+			  <html:text property="descricao" /><br>
+			  <html:submit value="Adicionar"/>
+			</html:form>
+		</div>
+		<div class="filtroDiv">
+			<span style="margin-bottom: 5px;">Filtrar por: </span>
+			<select style='height: 36px' class="filtro1">
+				<option>Nenhum</option>
+				<c:forEach items="${todosDepartamentos}" var="departamento">
+					<option>${departamento.nome}</option>
+				</c:forEach>
+			</select>
+			<select style='height: 36px' class="filtro2">
+				<option>Nenhum</option>
+				<option>Aberta</option>
+				<option>Em andamento</option>
+				<option>Finalizada</option>
+			</select>
+		</div>
 	</div>
 	<div>
-	<table style='margin-bottom: 5px;'>
+	<table style='margin-bottom: 5px;' class="tabelaSolicitacao">
 		<thead>
 			<tr>
 				<th>Departamento responsavel</th>
@@ -263,49 +283,6 @@ select:focus {
 		</tbody>
 	</table>
 		<pag:pagination totalPaginas="${totalPaginasSolicitacao}" classe="Solicitacao" paginaAtual="${paginaAtualSolicitacao}"/>
-	</div>
-	
-	<div>
-	<h3>Usuarios </h3>
-	</div>
-		<div>
-	<table style='margin-bottom: 5px;'>
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Login</th>
-				<th>Perfil</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${empty  usuarios}"> <!-- mudar pra c:choose otherwise depois -->
-				<tr>
-					<td colspan="7" style="text-align:center; color: #999;">Nenhum usuário disponivel</td>
-						
-				</tr>		
-			</c:if>
-			
-			 <c:forEach items="${usuarios}" var="usuario">
-				<tr>
-					<td><c:out value="${usuario.nome}"></c:out></td>
-					<td><c:out value="${usuario.login}"></c:out></td>
-					<td ><c:out value="${usuario.perfil}"></c:out></td>
-					<td style="display: none;" class="idUsuario"><c:out value="${usuario.id}"></c:out></td>
-					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
-				        <button class="menu-btn">⋯</button>
-				        <div class="menu-popup">
-				            <c:if test="${ usuario.perfil != 'ADMIN' || usuarioLogado.id == usuario.id}">
-				            	<a href="#" class="editarUsuarioLink">Editar</a>
-				            	<a href="#" class="exluirLink">Excluir</a>
-				            </c:if>
-				        </div>
-    				</td>	
-				</tr>
-			</c:forEach> 
-		</tbody>
-	</table>
-	<pag:pagination totalPaginas="${totalPaginasUsuario}" classe="Usuario" paginaAtual="${paginaAtualUsuario}"/>
 	</div>
 	
 	<div>
@@ -356,6 +333,49 @@ select:focus {
 	<pag:pagination totalPaginas="${totalPaginasDepartamento}" classe="Departamento" paginaAtual="${paginaAtualDepartamento}"/>
 	</div>
 	
+		<div>
+	<h3>Usuarios </h3>
+	</div>
+		<div>
+	<table style='margin-bottom: 5px;'>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Login</th>
+				<th>Perfil</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:if test="${empty  usuarios}"> <!-- mudar pra c:choose otherwise depois -->
+				<tr>
+					<td colspan="7" style="text-align:center; color: #999;">Nenhum usuário disponivel</td>
+						
+				</tr>		
+			</c:if>
+			
+			 <c:forEach items="${usuarios}" var="usuario">
+				<tr>
+					<td><c:out value="${usuario.nome}"></c:out></td>
+					<td><c:out value="${usuario.login}"></c:out></td>
+					<td ><c:out value="${usuario.perfil}"></c:out></td>
+					<td style="display: none;" class="idUsuario"><c:out value="${usuario.id}"></c:out></td>
+					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
+				        <button class="menu-btn">⋯</button>
+				        <div class="menu-popup">
+				            <c:if test="${ usuario.perfil != 'ADMIN' || usuarioLogado.id == usuario.id}">
+				            	<a href="#" class="editarUsuarioLink">Editar</a>
+				            	<a href="#" class="exluirLink">Excluir</a>
+				            </c:if>
+				        </div>
+    				</td>	
+				</tr>
+			</c:forEach> 
+		</tbody>
+	</table>
+	<pag:pagination totalPaginas="${totalPaginasUsuario}" classe="Usuario" paginaAtual="${paginaAtualUsuario}"/>
+	</div>
+	
 	<form class="formSolicitacaoEdicao" method="post" action="/atualizaSolicitacao.do" style="display: none;">
 	  <input type="hidden" name="id" />
 	  <input type="hidden" name="titulo" />
@@ -383,6 +403,33 @@ select:focus {
 	</form>
 	
 	<script>
+	
+	selectsFiltra = document.querySelector(".filtroDiv").querySelectorAll("select")
+	selectsFiltra.forEach(select => {
+		select.addEventListener('change', function () {
+			trs = document.querySelector(".tabelaSolicitacao").querySelector("tbody").querySelectorAll("tr")
+			let filtros = []
+			selectsFiltra.forEach(select => {
+				if (select.value == "Nenhum") {
+					
+				} else {
+					filtros.push(select.value)
+				}
+				
+			})
+			trs.forEach(tr => {
+				if (tr) {
+						if (filtros.every(filtro => tr.textContent.toUpperCase().includes(filtro.toUpperCase())) == false) {
+							tr.style.display = "none";
+						}  else {
+							tr.style.display = "";
+						}
+				}
+			})
+			
+		})
+	})
+
 	
 	document.querySelectorAll(".exluirLink").forEach(link => {
 		link.addEventListener('click',function(e) {
@@ -414,16 +461,16 @@ select:focus {
 			}
 			
 			
-		 }); // 
+		 });
 	});
 	
 	formularios = document.querySelectorAll(".formularioAdiciona");
 	document.querySelectorAll(".botaoAdicionar").forEach(button => {
 	    button.addEventListener("click", () => {
-	        // Sobe até o <div> pai que envolve o <h3> e o .formularioAdiciona
+	        
 	        const container = button.closest("div");
 
-	        // Procura o formulário dentro desse container
+	       
 	        const form = container.querySelector(".formularioAdiciona");
 
 	        if (form) {
@@ -450,13 +497,20 @@ select:focus {
 	        }
 			
 			tds[0].innerHTML = `
-				<box:bombox atributoName="departamento" lista="${departamentos}"/>
+				<box:bombox atributoName="departamento" lista="${todosDepartamentos}"/>
 			`
 			
 			 // mudar para bombox
 			tdParaInput(tds[1]);
 			tdParaInput(tds[2]);
-			tdParaInput(tds[5]); // mudar para bombox
+			tds[5].innerHTML = `
+				<select>
+					<option disabled>----</option>
+					<option>ABERTA</option>
+					<option>EM ANDAMENTO</option>
+					<option>FINALIZADA</option>
+				</select>
+			`
 			
 			let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;
 			botaoSalvar = tr.querySelector("button");
@@ -464,7 +518,7 @@ select:focus {
 				const departamentoResponsavelId = tds[0].getAttribute("data-id");
 				const titulo = tds[1].querySelector('input').value;
 				const descricao = tds[2].querySelector('input').value;
-				const status = tds[5].querySelector('input').value;
+				const status = tds[5].querySelector('select').value;
 				const id = tds[6].textContent;
 				
 				const form = document.querySelector(".formSolicitacaoEdicao");
@@ -504,7 +558,7 @@ select:focus {
 			tdParaInput(tds[1]);
 			tds[2].innerHTML = `
 				<select>
-					<option disabled selected>----</option>
+					<option disabled>----</option>
 					<option>PADRÃO</option>
 					<option>ADMIN</option>
 				</select>	
@@ -551,8 +605,8 @@ select:focus {
 			tdParaInput(tds[0]); 
 			
 			tds[1].innerHTML = `
-				<box:bombox atributoName="usuario" lista="${usuarios}"/>
-			`
+				<box:bombox atributoName="usuario" lista="${todosUsuarios}"/>
+			`	
 			
 			
 			let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;

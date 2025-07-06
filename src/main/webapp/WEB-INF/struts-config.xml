@@ -26,6 +26,13 @@
 		</action>   -->
 		
 		<action 
+			path="/filtra"
+			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardPaginadoAction"
+			scope="request">
+			<forward name="carregaDashboard" path="/carregaDashboard.do" />
+		</action>
+		
+		<action 
 			path="/carregaDashboard"
 			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardPaginadoAction"
 			scope="request">

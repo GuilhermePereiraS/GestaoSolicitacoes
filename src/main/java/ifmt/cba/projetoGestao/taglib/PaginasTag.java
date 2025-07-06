@@ -40,7 +40,7 @@ public class PaginasTag extends TagSupport {
 
 	            for (int i = 1; i <= totalPaginas; i++) {
 	                if (i == paginaAtual) {
-	                    out.write("<span style='font-weight:bold; font-size:1.2em; margin: 0 5px;'>" + i + "</span>");
+	                    out.write("<span style='font-weight:bold; color:#3c0f73; font-size:1.2em; margin: 0 5px;'>" + i + "</span>");
 	                } else {
 	                    out.write("<a href='?page" + classe + "=" + i + "' style='margin: 0 5px; background-color: #5b10c4; color:white; padding: 2px; border-radius: 2px;'>" + i + "</a>");
 	                }

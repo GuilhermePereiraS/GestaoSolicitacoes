@@ -26,7 +26,7 @@ public class CarregaDashboardPaginadoAction extends Action  {
 		HttpSession session = request.getSession();
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
 		
-		int itemsPorPagina = 3;
+		int itemsPorPagina = 5;
 		
 		//adicionar verificação de usuario nulo, se for nulo manda pra pagina inicial
 		if (usuarioLogado.getPerfil().equals("ADMIN")) {
@@ -64,6 +64,7 @@ public class CarregaDashboardPaginadoAction extends Action  {
 			request.setAttribute("departamentos", departamentos);
 			request.setAttribute("usuarios",usuarios);
 			request.setAttribute("todosUsuarios",dao.lista("Usuario"));
+			request.setAttribute("todosDepartamentos",dao.lista("Departamento"));
 			return mapping.findForward("dashboardAdmin");
 		} else {
 			int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
