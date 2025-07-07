@@ -36,6 +36,10 @@ public class AdicionaSolicitacaoAction extends Action  {
 		solicitacao.setDescricao(formPreenchido.getDescricao());
 		solicitacao.setSolicitante(usuarioLogado);
 		solicitacao.setStatus("ABERTA");
+		
+		if (request.getParameter("departamentoResponsavel") == null	) {
+			return new ActionForward("carregaDashboard.do?formularioComElementosVazios=true",true);
+		}
 		for (Departamento d : listaD) {
 			if (d.getId() == Integer.parseInt(request.getParameter("departamentoResponsavel"))) {
 				solicitacao.setDepartamento_responsavel(d);

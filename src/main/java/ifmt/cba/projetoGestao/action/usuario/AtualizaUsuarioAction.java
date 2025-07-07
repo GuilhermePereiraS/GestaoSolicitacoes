@@ -18,10 +18,10 @@ public class AtualizaUsuarioAction extends Action  {
 		Usuario usuario = (Usuario) dao.buscaPorId("Usuario", Integer.parseInt(request.getParameter("id")));
 		
 		usuario.setLogin(request.getParameter("login"));
-		usuario.setNome(request.getParameter("nome"));
 		usuario.setPerfil(request.getParameter("perfil"));
 		
 		dao.edita(usuario);
+		
 		
 		//atualizausuario(user);
 		return mapping.findForward("dashboard");	

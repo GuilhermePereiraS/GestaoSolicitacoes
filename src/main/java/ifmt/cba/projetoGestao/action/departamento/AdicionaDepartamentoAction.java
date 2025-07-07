@@ -24,13 +24,23 @@ public class AdicionaDepartamentoAction extends Action  {
 		Dao dao = new Dao();
 		List<Usuario> listaU = dao.lista("Usuario");
 		
-		departamento.setNome(formPreenchido.getNome());
-		int responsavelFormId = Integer.parseInt(request.getParameter("responsavelId"));
 		
-		for (Usuario u : listaU) {
-			if (u.getId() == responsavelFormId) {  
-				departamento.setResponsavel(u);
+		if (formPreenchido.getNome().equals("")) {
+			return new ActionForward("carregaDashboard.do?nomeDepartamentoNaoSelecionado=true",true);
+		} else {			
+			departamento.setNome(formPreenchido.getNome());
+		}
+		
+		int responsavelFormId = request.getParameter("responsavelId") == null ? -1 : Integer.parseInt(request.getParameter("responsavelId"));
+		
+		if (responsavelFormId != -1) {
+			for (Usuario u : listaU) {
+				if (u.getId() == responsavelFormId) {  
+					departamento.setResponsavel(u);
+				}
 			}
+		} else {
+			return new ActionForward("carregaDashboard.do?responsavelNaoSelecionado=true",true);
 		}
 		
 		dao.persiste(departamento);

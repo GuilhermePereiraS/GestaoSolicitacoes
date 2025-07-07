@@ -196,6 +196,33 @@ select:focus {
     	gap: 1rem;
     }
     
+    .aviso {
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+}
+
+.aviso button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+.aviso button:hover {
+  background-color: #ddd;
+}
+    
     .filtroDiv {
     	text-align: right;	
     	margin-bottom:5px;
@@ -209,8 +236,14 @@ select:focus {
 </head>
 <body>
 	<div class="notificacoes">
-		<c:if test="${exclusaoDeUsuarioComUmDepartamento}">
-				<not:notificacao tipoAlerta="Erro">Usuario não encontrado</not:notificacao>
+		<c:if test="${param.responsavelNaoSelecionado == 'true'}">
+				<not:notificacao tipoAlerta="Erro">Responsavel não selecionado</not:notificacao>
+		</c:if>
+		<c:if test="${param.formularioComElementosVazios == 'true'}">
+				<not:notificacao tipoAlerta="Erro">Departamento não selecionado</not:notificacao>
+		</c:if>
+		<c:if test="${param.nomeDepartamentoNaoSelecionado == 'true'}">
+				<not:notificacao tipoAlerta="Erro">Nome do departamento não selecionado</not:notificacao>
 		</c:if>
 	</div>
 	

@@ -11,32 +11,6 @@
 <title>Login</title>
 <style>
 
-.aviso {
-  padding: 15px 20px;
-  border-radius: 10px;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  font-family: Arial, sans-serif;
-}
-
-.aviso button {
-  margin-top: 12px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #333;
-  background-color: #f0f0f0;
-  transition: background-color 0.3s ease;
-}
-
-.aviso button:hover {
-  background-color: #ddd;
-}
 
     body {
         font-family: Arial, sans-serif;
@@ -105,6 +79,32 @@
         color: #555;
     }
     
+	.aviso {
+	  padding: 15px 20px;
+	  border-radius: 10px;
+	  color: white;
+	  font-weight: 600;
+	  font-size: 1rem;
+	  text-align: center;
+	  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	  font-family: Arial, sans-serif;
+	}
+	
+	.aviso button {
+	  margin-top: 12px;
+	  padding: 8px 16px;
+	  border: none;
+	  border-radius: 8px;
+	  cursor: pointer;
+	  font-weight: bold;
+	  color: #333;
+	  background-color: #f0f0f0;
+	  transition: background-color 0.3s ease;
+	}
+	
+	.aviso button:hover {
+	  background-color: #ddd;
+	}
     
     .notificacoes {
     	top: 10px;
