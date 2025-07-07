@@ -29,52 +29,66 @@ public class CarregaDashboardPaginadoAction extends Action  {
 		int itemsPorPagina = 5;
 		
 		//adicionar verificação de usuario nulo, se for nulo manda pra pagina inicial
-		if (usuarioLogado.getPerfil().equals("ADMIN")) {
-			
-			int paginaAtualUsuario = request.getParameter("pageUsuario") != null ? Integer.parseInt(request.getParameter("pageUsuario")) : 1;
-			int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
-			int paginaAtualDepartamento = request.getParameter("pageDepartamento") != null ? Integer.parseInt(request.getParameter("pageDepartamento")) : 1;
-			
-			
-			int totalPaginasUsuario = (int) Math.ceil((double) dao.contarTotal("Usuario")/itemsPorPagina);
-			int totalPaginasSolicitacao = (int) Math.ceil((double) dao.contarTotal("Solicitacao")/itemsPorPagina);
-			int totalPaginasDepartamento = (int) Math.ceil((double) dao.contarTotal("Departamento")/itemsPorPagina);
-			
-			request.setAttribute("totalPaginasUsuario", totalPaginasUsuario);
-			request.setAttribute("paginaAtualUsuario", paginaAtualUsuario);
-			
-			request.setAttribute("totalPaginasSolicitacao", totalPaginasSolicitacao);
-			request.setAttribute("paginaAtualSolicitacao", paginaAtualSolicitacao);
-			
-			request.setAttribute("totalPaginasDepartamento", totalPaginasDepartamento);
-			request.setAttribute("paginaAtualDepartamento", paginaAtualDepartamento);
-			
-			
-			
-			List<Usuario> usuarios = dao.listaPaginada("Usuario", itemsPorPagina, paginaAtualUsuario);
-			List<Departamento> departamentos = dao.listaPaginada("Departamento",itemsPorPagina, paginaAtualDepartamento  );
-			List <Solicitacao> solicitacoes = dao.listaPaginada("Solicitacao", itemsPorPagina, paginaAtualSolicitacao);
-			List<Usuario> usuariosAdmin = new ArrayList(usuarios);
-			
-			usuariosAdmin.removeIf(u -> u.getPerfil().equals("PADRÃO"));
-			
-			
-			request.setAttribute("usuariosAdmin", usuariosAdmin);
-			request.setAttribute("solicitacoes", solicitacoes);
-			request.setAttribute("departamentos", departamentos);
-			request.setAttribute("usuarios",usuarios);
-			request.setAttribute("todosUsuarios",dao.lista("Usuario"));
-			request.setAttribute("todosDepartamentos",dao.lista("Departamento"));
-			return mapping.findForward("dashboardAdmin");
+		
+		if (usuarioLogado == null) {
+			request.setAttribute("usuarioNulo", true);
+			return mapping.findForward("paginaInicial");
 		} else {
-			int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
-			int totalPaginasSolicitacao = (int) Math.ceil((double) dao.contarTotal("Solicitacao")/itemsPorPagina);
-			
-			List<Departamento> departamentos = dao.lista("Departamento");
-			
-			List <Solicitacao> solicitacoes = dao.listaPaginada("Solicitacao", itemsPorPagina, paginaAtualSolicitacao);
-			request.setAttribute("departamentos", departamentos);
-			return mapping.findForward("dashboardPadrao");
+			switch(usuarioLogado.getPerfil()) {
+			case "PADRÃO":{
+				int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
+				int totalPaginasSolicitacao = (int) Math.ceil((double) dao.contarTotal("Solicitacao")/itemsPorPagina);
+				
+				List<Departamento> departamentos = dao.lista("Departamento");
+				List <Solicitacao> solicitacoes = dao.listaPaginada("Solicitacao", itemsPorPagina, paginaAtualSolicitacao);
+				
+				request.setAttribute("totalPaginasSolicitacao", totalPaginasSolicitacao);
+				request.setAttribute("paginaAtualSolicitacao", paginaAtualSolicitacao);
+				request.setAttribute("solicitacoes", solicitacoes);
+				request.setAttribute("departamentos", departamentos);
+				request.setAttribute("todosDepartamentos",dao.lista("Departamento"));
+				return mapping.findForward("dashboardPadrao");
+				}
+			case "ADMIN":{
+				int paginaAtualUsuario = request.getParameter("pageUsuario") != null ? Integer.parseInt(request.getParameter("pageUsuario")) : 1;
+				int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
+				int paginaAtualDepartamento = request.getParameter("pageDepartamento") != null ? Integer.parseInt(request.getParameter("pageDepartamento")) : 1;
+				
+				int totalPaginasUsuario = (int) Math.ceil((double) dao.contarTotal("Usuario")/itemsPorPagina);
+				int totalPaginasSolicitacao = (int) Math.ceil((double) dao.contarTotal("Solicitacao")/itemsPorPagina);
+				int totalPaginasDepartamento = (int) Math.ceil((double) dao.contarTotal("Departamento")/itemsPorPagina);
+				
+				request.setAttribute("totalPaginasUsuario", totalPaginasUsuario);
+				request.setAttribute("paginaAtualUsuario", paginaAtualUsuario);
+				
+				request.setAttribute("totalPaginasSolicitacao", totalPaginasSolicitacao);
+				request.setAttribute("paginaAtualSolicitacao", paginaAtualSolicitacao);
+				
+				request.setAttribute("totalPaginasDepartamento", totalPaginasDepartamento);
+				request.setAttribute("paginaAtualDepartamento", paginaAtualDepartamento);
+				
+				
+				
+				List<Usuario> usuarios = dao.listaPaginada("Usuario", itemsPorPagina, paginaAtualUsuario);
+				List<Departamento> departamentos = dao.listaPaginada("Departamento",itemsPorPagina, paginaAtualDepartamento  );
+				List <Solicitacao> solicitacoes = dao.listaPaginada("Solicitacao", itemsPorPagina, paginaAtualSolicitacao);
+				List<Usuario> usuariosAdmin = new ArrayList(usuarios);
+				
+				usuariosAdmin.removeIf(u -> u.getPerfil().equals("PADRÃO"));
+				
+				
+				request.setAttribute("usuariosAdmin", usuariosAdmin);
+				request.setAttribute("solicitacoes", solicitacoes);
+				request.setAttribute("departamentos", departamentos);
+				request.setAttribute("usuarios",usuarios);
+				request.setAttribute("todosUsuarios",dao.lista("Usuario"));
+				request.setAttribute("todosDepartamentos",dao.lista("Departamento"));
+				return mapping.findForward("dashboardAdmin");
+				}
+			default:
+				return mapping.findForward("paginaInicial");
+			}
 		}
+		
 	}
 }

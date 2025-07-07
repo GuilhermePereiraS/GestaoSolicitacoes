@@ -127,6 +127,20 @@
 		<c:if test="${senhaIncorreta}">
 			<not:notificacao tipoAlerta="Aviso">Senha incorreta</not:notificacao>
 		</c:if>	
+		
+		<c:if test="${usuarioCadastrado != null }">
+			<c:choose>
+				<c:when test="${usuarioCadastrado }">
+					<not:notificacao tipoAlerta="Sucesso">Usuario cadastrado com sucesso</not:notificacao>
+				</c:when>
+				<c:otherwise>
+					<not:notificacao tipoAlerta="Erro">Usuario não pode ser cadastrado</not:notificacao>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+		<c:if test="${usuarioNulo}">
+			<not:notificacao tipoAlerta="Aviso">Usuario desconectado</not:notificacao>
+		</c:if>
 	</div>
 	
 	

@@ -44,6 +44,6 @@ public class AdicionaSolicitacaoAction extends Action  {
 		
 		dao.persiste(solicitacao);
 		
-		return mapping.findForward("dashBoardAdmin");
+		return mapping.findForward("dashboard");
 	}
 }

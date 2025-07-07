@@ -16,10 +16,13 @@ public class AtualizaDepartamentoAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			Dao dao = new Dao();
 			Departamento departamento = (Departamento) dao.buscaPorId("Departamento", Integer.parseInt(request.getParameter("id")));
-			Usuario usuarioResponsavel = (Usuario) dao.buscaPorId("Usuario", Integer.parseInt(request.getParameter("usuarioResponsavelId")));
+			Usuario usuarioResponsavel = request.getParameter("usuarioResponsavelId").equals("----") ? null : (Usuario) dao.buscaPorId("Usuario", Integer.parseInt(request.getParameter("usuarioResponsavelId")));
 			
 			departamento.setNome(request.getParameter("nome"));
-			departamento.setResponsavel(usuarioResponsavel);
+			
+			if (usuarioResponsavel != null) {
+				departamento.setResponsavel(usuarioResponsavel);
+			}
 			
 			dao.edita(departamento);
 			

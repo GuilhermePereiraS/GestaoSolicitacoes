@@ -20,27 +20,32 @@ public class AtualizaSolicitacaoAction extends Action  {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		Dao dao = new Dao();
-		Solicitacao solicitacao = (Solicitacao) dao.buscaPorId("Solicitacao", Integer.parseInt(request.getParameter("id")));
+		List<Usuario> listaU = dao.lista("Usuario");
+		List<Departamento> listaD = dao.lista("Departamento");	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		Solicitacao solicitacao = (Solicitacao) dao.buscaPorId("Solicitacao", Integer.parseInt(request.getParameter("id")));
 		
 		solicitacao.setTitulo(request.getParameter("titulo"));
 		solicitacao.setDescricao(request.getParameter("descricao"));
-		solicitacao.setStatus(request.getParameter("status"));
+		
+		if (!request.getParameter("status").equals("----")) {
+			solicitacao.setStatus(request.getParameter("status"));
+		} 
+		
+		int DepartamentoId = request.getParameter("departamentoResponsavelId").equals("----") ? -1 : Integer.parseInt(request.getParameter("departamentoResponsavelId"));
 		
 		
-		int DepartamentoId = Integer.parseInt(request.getParameter("departamentoResponsavelId"));
-		
-		List<Usuario> listaU = dao.lista("Usuario");
-		List<Departamento> listaD = dao.lista("Departamento");	
-		
-		for (Departamento d : listaD) {
-			if (d.getId() == DepartamentoId) {
-				solicitacao.setDepartamento_responsavel(d);
-			}
-		}
+		if (DepartamentoId != -1) {
+			for (Departamento d : listaD) {
+				if (d.getId() == DepartamentoId) {
+					solicitacao.setDepartamento_responsavel(d);
+				}
+			}	
+		} 
 		
 		dao.edita(solicitacao);
 		
-		return mapping.findForward("dashBoard");
+		return mapping.findForward("dashboard");
 	}
 }

@@ -26,18 +26,12 @@
 		</action>   -->
 		
 		<action 
-			path="/filtra"
-			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardPaginadoAction"
-			scope="request">
-			<forward name="carregaDashboard" path="/carregaDashboard.do" />
-		</action>
-		
-		<action 
 			path="/carregaDashboard"
 			type="ifmt.cba.projetoGestao.action.outras.CarregaDashboardPaginadoAction"
 			scope="request">
 			<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp" />
 			<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp" />
+			<forward name="paginaInicial" path="/login.jsp" />
 		</action>
 	
 		<!-- Usuario -->
@@ -48,7 +42,7 @@
 			name="loginForm">
 			
 			<forward name="paginaInicial" path="/login.jsp"/>
-			<forward name="carregaDashboard" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<action 
@@ -60,11 +54,18 @@
 		</action>
 		
 		<action 
+			path="/testaCadastro"
+			type="ifmt.cba.projetoGestao.action.usuario.TestaCadastroAction"
+			scope="request">
+			<forward name="paginaInicial" path="/login.jsp"/>
+		</action>
+		
+		<action 
 			path="/atualizaUsuario"
 			type="ifmt.cba.projetoGestao.action.usuario.AtualizaUsuarioAction"
 			scope="request"
 			name="usuarioTabelaForm">
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<action 
@@ -72,8 +73,7 @@
 			type="ifmt.cba.projetoGestao.action.usuario.ExcluiUsuarioAction"
 			scope="request"
 			name="usuarioTabelaForm">
-			<forward name="dashBoardPadrao" path="/carregaDashboard.do" redirect="true"/>
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<!-- Departamento -->
@@ -82,7 +82,7 @@
 			type="ifmt.cba.projetoGestao.action.departamento.AdicionaDepartamentoAction"
 			scope="request"
 			name="departamentoTabelaForm">
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<action 
@@ -97,8 +97,7 @@
 			path="/exclui"
 			type="ifmt.cba.projetoGestao.action.outras.ExcluiAction"
 			scope="request">
-			<forward name="dashBoardPadrao" path="/carregaDashboard.do"/>
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<!-- Solicitação -->
@@ -107,7 +106,7 @@
 			type="ifmt.cba.projetoGestao.action.solicitacao.AdicionaSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<action 
@@ -115,7 +114,7 @@
 			type="ifmt.cba.projetoGestao.action.solicitacao.AtualizaSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
-			<forward name="dashBoard" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 		<action 
@@ -123,7 +122,7 @@
 			type="ifmt.cba.projetoGestao.action.solicitacao.ExcluiSolicitacaoAction"
 			scope="request"
 			name="solicitacaoTabelaForm">
-			<forward name="dashBoardAdmin" path="/carregaDashboard.do" redirect="true"/>
+			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
 		
 	</action-mappings>

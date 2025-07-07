@@ -28,10 +28,6 @@ public class CadastraUsuarioAction extends Action  {
 		//melhorar a criptografia
 		dao.persiste(usuarioNovo);
 		
-		if (usuarioNovo.getPerfil().equals("ADMIN")) {
-			return mapping.findForward("dashBoardAdmin");
-		} else {
-			return mapping.findForward("paginaInicial");
-		}
+		return new ActionForward("testaCadastro.do?loginUsuarioNovo=" + usuarioNovo.getLogin(),true);
 	}
 }

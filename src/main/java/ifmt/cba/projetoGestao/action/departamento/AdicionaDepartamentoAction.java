@@ -37,6 +37,6 @@ public class AdicionaDepartamentoAction extends Action  {
 		
 		departamento.setResponsavel(null);
 		
-		return mapping.findForward("dashBoardAdmin");
+		return mapping.findForward("dashboard");
 	}
 }

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>Dashboard admin</title>
 <style>
 
 select {
@@ -201,27 +201,30 @@ select:focus {
     	margin-bottom:5px;
     }
 
+	tbody tr {
+	    height: 50px;
+	}
+
 </style>
 </head>
 <body>
-
-<div class="notificacoes">
+	<div class="notificacoes">
 		<c:if test="${exclusaoDeUsuarioComUmDepartamento}">
-			<not:notificacao tipoAlerta="Erro">Usuario não encontrado</not:notificacao>
+				<not:notificacao tipoAlerta="Erro">Usuario não encontrado</not:notificacao>
 		</c:if>
 	</div>
-
+	
 	<div>
 		<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
 		<div class="formularioAdiciona" style="display: none;">
 			<html:form action="/adicionaSolicitacao">
-			  <label>Departamento responsavel:</label><br>
-			  <box:bombox atributoName="departamentoResponsavel" lista="${todosDepartamentos}"/><br>
-			  <label>Titulo:</label><br>
-			  <html:text property="titulo" /><br>
-			  <label>Descrição:</label><br>
-			  <html:text property="descricao" /><br>
-			  <html:submit value="Adicionar"/>
+				<label>Departamento responsavel:</label><br>
+				<box:bombox atributoName="departamentoResponsavel" lista="${todosDepartamentos}"/><br>
+				<label>Titulo:</label><br>
+				<html:text property="titulo" /><br>
+				<label>Descrição:</label><br>
+				<html:text property="descricao" /><br>
+				<html:submit value="Adicionar"/>
 			</html:form>
 		</div>
 		<div class="filtroDiv">
@@ -267,7 +270,14 @@ select:focus {
 					<td data-id="${solicitacao.departamento_responsavel.id}"><c:out value="${solicitacao.departamento_responsavel.nome}"></c:out></td>
 					<td><c:out value="${solicitacao.titulo}"></c:out></td>
 					<td><c:out value="${solicitacao.descricao}"></c:out></td>
-					<td data-id="${solicitacao.solicitante.id}"><c:out value="${solicitacao.solicitante.nome}"></c:out></td>
+					<c:choose>
+						<c:when test="${solicitacao.solicitante == null}">
+							<td><i>[solicitante excluído]</i></td>
+						</c:when>
+						<c:otherwise>
+							<td data-id="${solicitacao.solicitante.id}"><c:out value="${solicitacao.solicitante.nome}"></c:out></td>
+						</c:otherwise>
+					</c:choose>
 					<td><fmt:formatDate value="${solicitacao.data_criacao}" pattern="dd/MM/yyyy" /></td>
 					<td><c:out value="${solicitacao.status}"></c:out></td>
 					<td style="display: none;" class="idSolicitacao"><c:out value="${solicitacao.id}"></c:out></td>
@@ -317,7 +327,14 @@ select:focus {
 			 <c:forEach items="${departamentos}" var="departamento">
 				<tr>
 					<td><c:out value="${departamento.nome}"></c:out></td>
-					<td data-id="${departamento.responsavel.id}"><c:out value="${departamento.responsavel.nome}"></c:out></td>
+					<c:choose>
+						<c:when test="${departamento.responsavel == null }">
+							<td><i>[responsavel excluído]</i></td>
+						</c:when>
+						<c:otherwise>
+							<td><c:out value="${departamento.responsavel.nome}"></c:out></td>
+						</c:otherwise>
+					</c:choose>
 					<td style="display: none;" class="idDepartamento"><c:out value="${departamento.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
@@ -361,14 +378,14 @@ select:focus {
 					<td ><c:out value="${usuario.perfil}"></c:out></td>
 					<td style="display: none;" class="idUsuario"><c:out value="${usuario.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
-				        <button class="menu-btn">⋯</button>
-				        <div class="menu-popup">
-				            <c:if test="${ usuario.perfil != 'ADMIN' || usuarioLogado.id == usuario.id}">
-				            	<a href="#" class="editarUsuarioLink">Editar</a>
-				            	<a href="#" class="exluirLink">Excluir</a>
-				            </c:if>
-				        </div>
-    				</td>	
+					    <c:if test="${ usuario.perfil != 'ADMIN' || usuarioLogado.id == usuario.id}">
+						    <button class="menu-btn">⋯</button>
+						    <div class="menu-popup">
+						       <a href="#" class="editarUsuarioLink">Editar</a>
+						       <a href="#" class="exluirLink">Excluir</a>
+						    </div>
+					    </c:if>
+	    			</td>	
 				</tr>
 			</c:forEach> 
 		</tbody>
@@ -505,7 +522,7 @@ select:focus {
 			tdParaInput(tds[2]);
 			tds[5].innerHTML = `
 				<select>
-					<option disabled>----</option>
+					<option>----</option>
 					<option>ABERTA</option>
 					<option>EM ANDAMENTO</option>
 					<option>FINALIZADA</option>
@@ -515,7 +532,7 @@ select:focus {
 			let botaoSalvar = tr.querySelector(".tdBotaoMenu").innerHTML = `<button class="botaoSalvar">salvar</button>`;
 			botaoSalvar = tr.querySelector("button");
 			botaoSalvar.addEventListener('click', ()=> {
-				const departamentoResponsavelId = tds[0].getAttribute("data-id");
+				const departamentoResponsavelId = tds[0].querySelector('select').value;
 				const titulo = tds[1].querySelector('input').value;
 				const descricao = tds[2].querySelector('input').value;
 				const status = tds[5].querySelector('select').value;

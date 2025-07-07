@@ -50,6 +50,6 @@ public class AutenticaUsuarioAction extends Action  {
 			return mapping.findForward("paginaInicial");
 		}
 		
-		return mapping.findForward("carregaDashboard");
+		return mapping.findForward("dashboard");
 	}
 }
