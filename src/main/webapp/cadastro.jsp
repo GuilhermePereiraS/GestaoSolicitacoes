@@ -77,7 +77,7 @@
 </head>
 <body>
 
-<html:form action="/cadastraUsuario">
+<html:form action="/usuario.do?action=cadastra">
 	<label>Insira seu nome:</label>
 	<html:text property="nome"/>
 	<label>Nome de usuario:</label>

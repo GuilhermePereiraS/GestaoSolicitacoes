@@ -15,6 +15,51 @@
 
 	<action-mappings>
 	
+	
+	<!-- action dispachers -->
+	
+	<action
+	path="/navegacao"
+	type="ifmt.cba.projetoGestao.actionDispatcher.NavegacaoAction"
+	scope="request"	
+	parameter="action">
+	
+	<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp"/>
+	<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp"/>
+	<forward name="paginaInicial" path="/login.jsp"/>
+	</action>
+	
+	<action
+	path="/usuario"
+	type="ifmt.cba.projetoGestao.actionDispatcher.UsuarioAction"
+	scope="request"	
+	parameter="action"
+	name="cadastroForm">
+	<forward name="dashboard" path="/navegacao.do?action=dashboard" redirect="true"/>
+	<forward name="paginaInicial" path="/navegacao.do?action=paginaInicial" redirect="true"/>
+	</action>
+	
+	<action
+	path="/departamento"
+	type="ifmt.cba.projetoGestao.actionDispatcher.DepartamentoAction"
+	scope="request"	
+	parameter="action"
+	name="departamentoTabelaForm">
+	<forward name="dashboard" path="/navegacao.do?action=dashboard" redirect="true"/>
+	<forward name="paginaInicial" path="/navegacao.do?action=paginaInicial" redirect="true"/>
+	</action>
+	
+	<action
+	path="/solicitacao"
+	type="ifmt.cba.projetoGestao.actionDispatcher.SolicitacaoAction"
+	scope="request"	
+	parameter="action"
+	name="solicitacaoTabelaForm">
+	<forward name="dashboard" path="/navegacao.do?action=dashboard" redirect="true"/>
+	<forward name="paginaInicial" path="/navegacao.do?action=paginaInicial" redirect="true"/>
+	</action>
+	
+	
 		<!-- Outras -->
 		
 	<!--	<action 
@@ -23,7 +68,9 @@
 			scope="request">
 			<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp" />
 			<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp" />
-		</action>   -->
+		</action>   
+		
+		
 		
 		<action 
 			path="/carregaDashboard"
@@ -32,9 +79,9 @@
 			<forward name="dashboardPadrao" path="/WEB-INF/dashboardPadrao.jsp" />
 			<forward name="dashboardAdmin" path="/WEB-INF/dashboardAdmin.jsp" />
 			<forward name="paginaInicial" path="/login.jsp" />
-		</action>
+		</action>-->
 	
-		<!-- Usuario -->
+		<!-- Usuario 
 		<action 
 			path="/autenticaUsuario"
 			type="ifmt.cba.projetoGestao.action.usuario.AutenticaUsuarioAction"
@@ -75,8 +122,9 @@
 			name="usuarioTabelaForm">
 			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
+		-->
 		
-		<!-- Departamento -->
+		<!-- Departamento 
 		<action 
 			path="/adicionaDepartamento"
 			type="ifmt.cba.projetoGestao.action.departamento.AdicionaDepartamentoAction"
@@ -99,8 +147,8 @@
 			scope="request">
 			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
-		
-		<!-- Solicitação -->
+		-->
+		<!-- Solicitação 
 		<action 
 			path="/adicionaSolicitacao"
 			type="ifmt.cba.projetoGestao.action.solicitacao.AdicionaSolicitacaoAction"
@@ -124,7 +172,7 @@
 			name="solicitacaoTabelaForm">
 			<forward name="dashboard" path="/carregaDashboard.do" redirect="true"/>
 		</action>
-		
+		-->
 	</action-mappings>
     
 </struts-config>

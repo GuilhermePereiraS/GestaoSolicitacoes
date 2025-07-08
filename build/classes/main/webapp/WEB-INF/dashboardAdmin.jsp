@@ -250,7 +250,7 @@ select:focus {
 	<div>
 		<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
 		<div class="formularioAdiciona" style="display: none;">
-			<html:form action="/adicionaSolicitacao">
+			<html:form action="/solicitacao.do?action=cadastra">
 				<label>Departamento responsavel:</label><br>
 				<box:bombox atributoName="departamentoResponsavel" lista="${todosDepartamentos}"/><br>
 				<label>Titulo:</label><br>
@@ -331,7 +331,7 @@ select:focus {
 	<div>
 	<h3>Departamentos <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
 		<div class="formularioAdiciona" style="display: none;">
-		<html:form action="/adicionaDepartamento" styleClass="formularioDepartamento">
+		<html:form action="/departamento.do?action=cadastra" styleClass="formularioDepartamento">
 		  <label>Nome do departamento:</label><br>
 		  <input type="text" name="nome"/><br>
 		  <label>Reponsavel:</label><br>
@@ -426,7 +426,7 @@ select:focus {
 	<pag:pagination totalPaginas="${totalPaginasUsuario}" classe="Usuario" paginaAtual="${paginaAtualUsuario}"/>
 	</div>
 	
-	<form class="formSolicitacaoEdicao" method="post" action="/atualizaSolicitacao.do" style="display: none;">
+	<form class="formSolicitacaoEdicao" method="post" action="/solicitacao.do?action=atualiza" style="display: none;">
 	  <input type="hidden" name="id" />
 	  <input type="hidden" name="titulo" />
 	  <input type="hidden" name="descricao" />
@@ -434,23 +434,35 @@ select:focus {
 	  <input type="hidden" name="departamentoResponsavelId" />
 	</form>
 	
-	<form class="formUsuarioEdicao" method="post" action="/atualizaUsuario.do" style="display: none;">
+	<form class="formUsuarioEdicao" method="post" action="/usuario.do?action=atualiza" style="display: none;">
 	  <input type="hidden" name="nome" />
 	  <input type="hidden" name="login" />
 	  <input type="hidden" name="perfil" />
 	  <input type="hidden" name="id" />
 	</form>
 	
-	<form class="formDepartamentoEdicao" method="post" action="/atualizaDepartamento.do" style="display: none;">
+	<form class="formDepartamentoEdicao" method="post" action="/departamento.do?action=atualiza" style="display: none;">
 	  <input type="hidden" name="nome" />
 	  <input type="hidden" name="usuarioResponsavelId" />
 	  <input type="hidden" name="id" />
 	</form>
 	
-	<form class="formExclusao" method="post" action="/exclui.do" style="display: none;">
+	<form class="formExclusaoUsuario" method="post" action="/usuario.do?action=exclui" style="display: none;">
 	  <input type="hidden" name="id" />
 	  <input type="hidden" name="tipo" />
 	</form>
+	
+	<form class="formExclusaoDepartamento" method="post" action="/departamento.do?action=exclui" style="display: none;">
+	  <input type="hidden" name="id" />
+	  <input type="hidden" name="tipo" />
+	</form>
+	
+	<form class="formExclusaoSolicitacao" method="post" action="/solicitacao.do?action=exclui" style="display: none;">
+	  <input type="hidden" name="id" />
+	  <input type="hidden" name="tipo" />
+	</form>
+	
+	
 	
 	<script>
 	
@@ -487,22 +499,30 @@ select:focus {
 			const tr = this.closest('tr');
 			const tds = tr.querySelectorAll('td');
 			
-			const form = document.querySelector(".formExclusao");
-			const id = form.querySelector('[name="id"]');
-			const tipo = form.querySelector('[name="tipo"]');
-			
 			for (const td of tds) {
 				if (td.classList.contains("idUsuario") ) {
+					let form = document.querySelector(".formExclusaoUsuario");
+					let id = form.querySelector('[name="id"]');
+					let tipo = form.querySelector('[name="tipo"]');
+			
 					id.value = td.textContent.trim();
 					tipo.value = "Usuario";
 					form.submit();
 					break;
 				} else if (td.classList.contains("idDepartamento")) {
+					let form = document.querySelector(".formExclusaoDepartamento");
+					let id = form.querySelector('[name="id"]');
+					let tipo = form.querySelector('[name="tipo"]');
+					
 					id.value = td.textContent.trim();
 					tipo.value = "Departamento"; 
 					form.submit();
 					break;
 				} else if (td.classList.contains("idSolicitacao")) {
+					let form = document.querySelector(".formExclusaoSolicitacao");
+					let id = form.querySelector('[name="id"]');
+					let tipo = form.querySelector('[name="tipo"]');
+					
 					id.value = td.textContent.trim();
 					tipo.value = "Solicitacao"; 
 					form.submit();

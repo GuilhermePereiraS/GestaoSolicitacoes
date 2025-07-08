@@ -145,7 +145,7 @@
 	
 	
 	
-	<html:form action="/autenticaUsuario">
+	<html:form action="/usuario.do?action=autentica">
 	<label>Usuario:</label><br>
 	<html:text property="login"/><br>
 	<label>Senha:</label><br>
