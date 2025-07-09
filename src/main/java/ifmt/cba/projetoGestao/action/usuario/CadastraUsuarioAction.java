@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import ifmt.cba.projetoGestao.DAO.Dao;
 import ifmt.cba.projetoGestao.form.CadastroForm;
 import ifmt.cba.projetoGestao.model.Usuario;
+import ifmt.cba.projetoGestao.model.Usuario.Perfil;
 import ifmt.cba.projetoGestao.util.CriptografiaUtil;
 
 public class CadastraUsuarioAction extends Action  {
@@ -24,7 +25,7 @@ public class CadastraUsuarioAction extends Action  {
 		usuarioNovo.setNome(formPreenchido.getNome());
 		usuarioNovo.setLogin(formPreenchido.getLogin());
 		usuarioNovo.setSenha(CriptografiaUtil.criptografa(formPreenchido.getSenha()));
-		usuarioNovo.setPerfil("PADRÃO");
+		usuarioNovo.setPerfil(Perfil.PADRAO);
 		//melhorar a criptografia
 		dao.persiste(usuarioNovo);
 		

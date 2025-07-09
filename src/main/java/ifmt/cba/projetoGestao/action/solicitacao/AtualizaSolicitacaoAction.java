@@ -30,7 +30,7 @@ public class AtualizaSolicitacaoAction extends Action  {
 		solicitacao.setDescricao(request.getParameter("descricao"));
 		
 		if (!request.getParameter("status").equals("----")) {
-			solicitacao.setStatus(request.getParameter("status"));
+		/*	solicitacao.setStatus(request.getParameter("status"));*/
 		} 
 		
 		int DepartamentoId = request.getParameter("departamentoResponsavelId").equals("----") ? -1 : Integer.parseInt(request.getParameter("departamentoResponsavelId"));

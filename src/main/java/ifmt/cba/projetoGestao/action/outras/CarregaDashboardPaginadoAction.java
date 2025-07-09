@@ -35,7 +35,7 @@ public class CarregaDashboardPaginadoAction extends Action  {
 			return mapping.findForward("paginaInicial");
 		} else {
 			switch(usuarioLogado.getPerfil()) {
-			case "PADRÃO":{
+			case PADRAO:{
 				int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
 				int totalPaginasSolicitacao = (int) Math.ceil((double) dao.contarTotal("Solicitacao")/itemsPorPagina);
 				
@@ -49,7 +49,7 @@ public class CarregaDashboardPaginadoAction extends Action  {
 				request.setAttribute("todosDepartamentos",dao.lista("Departamento"));
 				return mapping.findForward("dashboardPadrao");
 				}
-			case "ADMIN":{
+			case ADMIN:{
 				int paginaAtualUsuario = request.getParameter("pageUsuario") != null ? Integer.parseInt(request.getParameter("pageUsuario")) : 1;
 				int paginaAtualSolicitacao = request.getParameter("pageSolicitacao") != null ? Integer.parseInt(request.getParameter("pageSolicitacao")) : 1;
 				int paginaAtualDepartamento = request.getParameter("pageDepartamento") != null ? Integer.parseInt(request.getParameter("pageDepartamento")) : 1;

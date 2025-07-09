@@ -17,6 +17,8 @@ import ifmt.cba.projetoGestao.DAO.Dao;
 import ifmt.cba.projetoGestao.form.SolicitacaoTabelaForm;
 import ifmt.cba.projetoGestao.model.Departamento;
 import ifmt.cba.projetoGestao.model.Solicitacao;
+import ifmt.cba.projetoGestao.model.Solicitacao.Status;
+import ifmt.cba.projetoGestao.model.Usuario.Perfil;
 import ifmt.cba.projetoGestao.model.Usuario;
 
 public class SolicitacaoAction extends DispatchAction{
@@ -37,7 +39,7 @@ public class SolicitacaoAction extends DispatchAction{
 		solicitacao.setTitulo(formPreenchido.getTitulo());
 		solicitacao.setDescricao(formPreenchido.getDescricao());
 		solicitacao.setSolicitante(usuarioLogado);
-		solicitacao.setStatus("ABERTA");
+		solicitacao.setStatus(Status.ABERTA);
 		
 		if (request.getParameter("departamentoResponsavel") == null	) {
 			return new ActionForward("navegacao.do?action=dashboard&formularioComElementosVazios=true",true);
@@ -66,7 +68,17 @@ public class SolicitacaoAction extends DispatchAction{
 		solicitacao.setDescricao(request.getParameter("descricao"));
 		
 		if (!request.getParameter("status").equals("----")) {
-			solicitacao.setStatus(request.getParameter("status"));
+			switch(request.getParameter("status")) {
+			case "ABERTA":
+				solicitacao.setStatus(Status.ABERTA);
+				break;
+			case "EM ANDAMENTO":
+				solicitacao.setStatus(Status.EM_ANDAMENTO);
+				break;
+			case "FINALIZADA":
+				solicitacao.setStatus(Status.FINALIZADA);
+				break;
+			}
 		} 
 		
 		int DepartamentoId = request.getParameter("departamentoResponsavelId").equals("----") ? -1 : Integer.parseInt(request.getParameter("departamentoResponsavelId"));
@@ -95,13 +107,13 @@ public class SolicitacaoAction extends DispatchAction{
 		String tipo = request.getParameter("tipo");
 		Object objeto = dao.buscaPorId(tipo, id);
 		
-			if (usuarioLogado.getPerfil().equals("PADRÃO")) {
+			if (usuarioLogado.getPerfil() == Perfil.PADRAO) {
 				Solicitacao solicitacao = (Solicitacao) objeto;	
 				if (solicitacao.getSolicitante().getId() == usuarioLogado.getId()) {
 					dao.deleta(objeto);	
 				}
 				return mapping.findForward("dashboard");
-			} else if (usuarioLogado.getPerfil().equals("ADMIN")) {
+			} else if (usuarioLogado.getPerfil() == Perfil.ADMIN) {
 				dao.deleta(objeto);	
 				return mapping.findForward("dashboard");
 			}

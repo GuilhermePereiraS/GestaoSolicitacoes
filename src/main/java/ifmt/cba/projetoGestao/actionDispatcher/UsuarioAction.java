@@ -15,6 +15,7 @@ import ifmt.cba.projetoGestao.DAO.Dao;
 import ifmt.cba.projetoGestao.form.CadastroForm;
 import ifmt.cba.projetoGestao.form.LoginForm;
 import ifmt.cba.projetoGestao.model.Usuario;
+import ifmt.cba.projetoGestao.model.Usuario.Perfil;
 import ifmt.cba.projetoGestao.util.CriptografiaUtil;
 
 public class UsuarioAction extends DispatchAction {
@@ -29,7 +30,7 @@ public class UsuarioAction extends DispatchAction {
 		usuarioNovo.setNome(formPreenchido.getNome());
 		usuarioNovo.setLogin(formPreenchido.getLogin());
 		usuarioNovo.setSenha(CriptografiaUtil.criptografa(formPreenchido.getSenha()));
-		usuarioNovo.setPerfil("PADRÃO");
+		usuarioNovo.setPerfil(Perfil.PADRAO);
 		//melhorar a criptografia
 		dao.persiste(usuarioNovo);
 		
@@ -42,7 +43,7 @@ public class UsuarioAction extends DispatchAction {
 		Usuario usuario = (Usuario) dao.buscaPorId("Usuario", Integer.parseInt(request.getParameter("id")));
 		
 		usuario.setLogin(request.getParameter("login"));
-		usuario.setPerfil(request.getParameter("perfil"));
+		usuario.setPerfil(request.getParameter("perfil").equals("ADMIN") ? Perfil.ADMIN : Perfil.PADRAO);
 		
 		dao.edita(usuario);
 		
@@ -62,7 +63,7 @@ public class UsuarioAction extends DispatchAction {
 		
 		Object objeto = dao.buscaPorId(tipo, id);
 		
-		if (usuarioLogado.getPerfil().equals("ADMIN")) {
+		if (usuarioLogado.getPerfil() == Perfil.ADMIN) {
 			dao.deleta(objeto);		
 			return mapping.findForward("dashboard");	
 		} else {

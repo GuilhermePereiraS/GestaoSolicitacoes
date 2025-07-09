@@ -1,13 +1,17 @@
 package ifmt.cba.projetoGestao.model;
 
+
 public class Usuario {
+	public enum Perfil {
+		PADRAO,
+		ADMIN
+	}
+	
 	private int id;
 	private String nome;
 	private String login;
 	private String senha;
-	private String perfil;
-	
-
+	private Perfil perfil;
 	
 	public int getId() {
 		return id;
@@ -33,13 +37,14 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public String getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
-	public void setPerfil(String perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+	
+
 	
 	
 	

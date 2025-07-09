@@ -3,12 +3,17 @@ package ifmt.cba.projetoGestao.model;
 import java.util.Date;
 
 public class Solicitacao {
+	public enum Status {
+		ABERTA,
+		EM_ANDAMENTO,
+		FINALIZADA
+	}
+	
 	private int id;
 	private String titulo;
 	private String descricao;
 	private Date data_criacao;
-	private String status;
-	
+	private Status status;
 	private Usuario solicitante;
 	private Departamento departamento_responsavel;
 	
@@ -45,11 +50,11 @@ public class Solicitacao {
 		this.data_criacao = data_criacao;
 	}
 	
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 	
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	

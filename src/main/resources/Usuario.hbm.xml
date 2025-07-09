@@ -12,9 +12,7 @@
         <property name="nome" column="nome"/>
         <property name="login" column="login"/>
         <property name="senha" column="senha"/>
-        <property name="perfil" column="perfil"/>
-
-		
-		
+        <property name="perfil" column="perfil" type="ifmt.cba.projetoGestao.util.PerfilCustomType"/>
+	
     </class>
 </hibernate-mapping>
