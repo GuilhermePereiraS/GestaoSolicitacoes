@@ -37,6 +37,7 @@
 	name="cadastroForm">
 	<forward name="dashboard" path="/navegacao.do?action=dashboard" redirect="true"/>
 	<forward name="paginaInicial" path="/navegacao.do?action=paginaInicial" redirect="true"/>
+	<forward name="paginaInicialTeste" path="/navegacao.do?action=paginaInicial"/>
 	</action>
 	
 	<action

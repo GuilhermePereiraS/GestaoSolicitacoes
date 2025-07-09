@@ -19,7 +19,7 @@ import ifmt.cba.projetoGestao.model.Usuario;
 
 public class DepartamentoAction extends DispatchAction{
 	
-	public ActionForward Cadastra(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward cadastra(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
 		DepartamentoTabelaForm formPreenchido = (DepartamentoTabelaForm) form;

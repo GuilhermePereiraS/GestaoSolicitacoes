@@ -100,7 +100,7 @@ public class UsuarioAction extends DispatchAction {
 			HttpSession session = request.getSession();
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} else {
-			return mapping.findForward("paginaInicial");
+			return mapping.findForward("paginaInicialTeste");
 		}
 		
 		return mapping.findForward("dashboard");
@@ -119,6 +119,6 @@ public class UsuarioAction extends DispatchAction {
 			request.setAttribute("usuarioCadastrado", false);
 		}
 		
-		return mapping.findForward("paginaInicial");
+		return mapping.findForward("paginaInicialTeste");
 	}
 }

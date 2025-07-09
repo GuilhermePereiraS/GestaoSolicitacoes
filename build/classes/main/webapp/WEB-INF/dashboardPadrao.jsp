@@ -247,7 +247,7 @@ select:focus {
 	<div>
 		<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>
 		<div class="formularioAdiciona" style="display: none;">
-			<html:form action="/adicionaSolicitacao">
+			<html:form action="/solicitacao.do?action=cadastra">
 				<label>Departamento responsavel:</label><br>
 				<box:bombox atributoName="departamentoResponsavel" lista="${todosDepartamentos}"/><br>
 				<label>Titulo:</label><br>
@@ -328,7 +328,7 @@ select:focus {
 	</div>
 	
 	
-	<form class="formSolicitacaoEdicao" method="post" action="/atualizaSolicitacao.do" style="display: none;">
+	<form class="formSolicitacaoEdicao" method="post" action="/solicitacao.do?action=atualiza" style="display: none;">
 	  <input type="hidden" name="id" />
 	  <input type="hidden" name="titulo" />
 	  <input type="hidden" name="descricao" />
@@ -336,7 +336,7 @@ select:focus {
 	  <input type="hidden" name="departamentoResponsavelId" />
 	</form>
 	
-	<form class="formExclusao" method="post" action="/exclui.do" style="display: none;">
+	<form class="formExclusao" method="post" action="/solicitacao.do?action=exclui" style="display: none;">
 	  <input type="hidden" name="id" />
 	  <input type="hidden" name="tipo" />
 	</form>
@@ -374,32 +374,20 @@ select:focus {
 		link.addEventListener('click',function(e) {
 			e.preventDefault();
 			const tr = this.closest('tr');
-			const tds = tr.querySelectorAll('td');
-			
-			const form = document.querySelector(".formExclusao");
-			const id = form.querySelector('[name="id"]');
-			const tipo = form.querySelector('[name="tipo"]');
+			const tds = tr.querySelectorAll('td');	
 			
 			for (const td of tds) {
-				if (td.classList.contains("idUsuario") ) {
-					id.value = td.textContent.trim();
-					tipo.value = "Usuario";
-					form.submit();
-					break;
-				} else if (td.classList.contains("idDepartamento")) {
-					id.value = td.textContent.trim();
-					tipo.value = "Departamento"; 
-					form.submit();
-					break;
-				} else if (td.classList.contains("idSolicitacao")) {
+				 if (td.classList.contains("idSolicitacao")) {
+					let form = document.querySelector(".formExclusao");
+					let id = form.querySelector('[name="id"]');
+					let tipo = form.querySelector('[name="tipo"]');
+						
 					id.value = td.textContent.trim();
 					tipo.value = "Solicitacao"; 
 					form.submit();
 					break;
 				}
 			}
-			
-			
 		 });
 	});
 	

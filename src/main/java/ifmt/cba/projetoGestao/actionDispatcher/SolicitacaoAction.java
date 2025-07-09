@@ -95,7 +95,7 @@ public class SolicitacaoAction extends DispatchAction{
 		String tipo = request.getParameter("tipo");
 		Object objeto = dao.buscaPorId(tipo, id);
 		
-			if (usuarioLogado.getPerfil().equals("PADRAO")) {
+			if (usuarioLogado.getPerfil().equals("PADRÃO")) {
 				Solicitacao solicitacao = (Solicitacao) objeto;	
 				if (solicitacao.getSolicitante().getId() == usuarioLogado.getId()) {
 					dao.deleta(objeto);	
@@ -105,7 +105,7 @@ public class SolicitacaoAction extends DispatchAction{
 				dao.deleta(objeto);	
 				return mapping.findForward("dashboard");
 			}
-		
+			
 		return mapping.findForward("dashboard");
 	}
 }
