@@ -231,10 +231,20 @@ select:focus {
 	tbody tr {
 	    height: 50px;
 	}
+	
+	header {
+		margin-left: 98%;
+	}
+	
+	header a {
+		cursor: pointer;
+	}
+	
 
 </style>
 </head>
 <body>
+	<header><a href="/usuario.do?action=sair">sair</a></header>
 	<div class="notificacoes">
 		<c:if test="${param.responsavelNaoSelecionado == 'true'}">
 				<not:notificacao tipoAlerta="Erro">Responsavel não selecionado</not:notificacao>
@@ -245,7 +255,17 @@ select:focus {
 		<c:if test="${param.nomeDepartamentoNaoSelecionado == 'true'}">
 				<not:notificacao tipoAlerta="Erro">Nome do departamento não selecionado</not:notificacao>
 		</c:if>
+		<c:if test="${param.usuarioComEntidadesVinculadas == 'true'}">
+				<not:notificacao tipoAlerta="Erro">Usuário com entidades vinculadas</not:notificacao>
+		</c:if>
+		<c:if test="${param.departamentoComEntidadesVinculadas == 'true'}">
+				<not:notificacao tipoAlerta="Erro">Departamento com entidades vinculadas</not:notificacao>
+		</c:if>
+		<c:if test="${param.usuarioJaLogado == 'true'}">
+				<not:notificacao tipoAlerta="Aviso">Usuario já logado em: <c:out value="${usuarioLogado.login}"></c:out>, saia para entrar em outra conta!</not:notificacao>
+		</c:if>
 	</div>
+	
 	
 	<div>
 		<h3>Solicitações <button class="botaoAdicionar" style="height: 30px; line-height: 7px">+</button></h3>

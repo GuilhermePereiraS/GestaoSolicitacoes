@@ -17,6 +17,7 @@ import ifmt.cba.projetoGestao.form.LoginForm;
 import ifmt.cba.projetoGestao.model.Usuario;
 import ifmt.cba.projetoGestao.model.Usuario.Perfil;
 import ifmt.cba.projetoGestao.util.CriptografiaUtil;
+import ifmt.cba.projetoGestao.util.ErroDeViolacaoConstraint;
 
 public class UsuarioAction extends DispatchAction {
 	
@@ -64,7 +65,11 @@ public class UsuarioAction extends DispatchAction {
 		Object objeto = dao.buscaPorId(tipo, id);
 		
 		if (usuarioLogado.getPerfil() == Perfil.ADMIN) {
-			dao.deleta(objeto);		
+			try {
+				dao.deleta(objeto);		
+			} catch (ErroDeViolacaoConstraint e) {
+				return new ActionForward("/navegacao.do?action=dashboard&usuarioComEntidadesVinculadas=true");
+			}
 			return mapping.findForward("dashboard");	
 		} else {
 			return mapping.findForward("dashboard");	
@@ -74,6 +79,7 @@ public class UsuarioAction extends DispatchAction {
 	public ActionForward autentica(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		Dao dao = new Dao();
+		HttpSession session = request.getSession();
 		CadastroForm formPreechido = (CadastroForm) form;
 		List<Usuario> ListaUsuario = dao.lista("Usuario");
 		Usuario usuarioLogado = null;
@@ -82,6 +88,9 @@ public class UsuarioAction extends DispatchAction {
 		Boolean loginNaoEncontrado = true;
 		Boolean senhaIncorreta = true;
 		
+		if (session.getAttribute("usuarioLogado") != null ) {
+			return new ActionForward("/navegacao.do?action=dashboard&usuarioJaLogado=true");
+		}
 		
 		for (Usuario u : ListaUsuario) {
 			if (u.getLogin().equals(formPreechido.getLogin())) {
@@ -98,7 +107,6 @@ public class UsuarioAction extends DispatchAction {
 		request.setAttribute("loginNaoEncontrado", loginNaoEncontrado);
 		
 		if (usuarioLogado != null) {
-			HttpSession session = request.getSession();
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} else {
 			return mapping.findForward("paginaInicialTeste");
@@ -121,5 +129,13 @@ public class UsuarioAction extends DispatchAction {
 		}
 		
 		return mapping.findForward("paginaInicialTeste");
+	}
+	
+	public ActionForward sair(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		session.removeAttribute("usuarioLogado");
+		
+		return mapping.findForward("paginaInicial");
 	}
 }

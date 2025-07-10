@@ -232,8 +232,17 @@ select:focus {
   background-color: #ddd;
 }
 
+header {
+		margin-left: 98%;
+}
+	
+header a {
+	cursor: pointer;
+}
+
 </style>
 </head>
+<header><a href="/usuario.do?action=sair">sair</a></header>
 <body>
 	<div class="notificacoes">
 		<c:if test="${exclusaoDeUsuarioComUmDepartamento}">
@@ -241,6 +250,9 @@ select:focus {
 		</c:if>
 		<c:if test="${param.formularioComElementosVazios == 'true'}">
 				<not:notificacao tipoAlerta="Erro">Departamento não selecionado</not:notificacao>
+		</c:if>
+		<c:if test="${param.usuarioJaLogado == 'true'}">
+				<not:notificacao tipoAlerta="Aviso">Usuario já logado em: '<c:out value="${usuarioLogado.login}"></c:out>', saia para entrar em outra conta!</not:notificacao>
 		</c:if>
 	</div>
 	

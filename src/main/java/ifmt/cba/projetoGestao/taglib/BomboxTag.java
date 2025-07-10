@@ -66,9 +66,7 @@ public class BomboxTag extends TagSupport {
 			} catch (NoSuchMethodException | SecurityException e) {
 				System.out.println("Não deu pra achar o metodo!! " + e.getMessage());
 			}
-		} else {
-			listaNomes.add("Lista Vazia");
-			}
+		} 
 		return listaNomes;
 	}
 	

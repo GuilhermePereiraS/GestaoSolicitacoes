@@ -17,6 +17,7 @@ import ifmt.cba.projetoGestao.model.Departamento;
 import ifmt.cba.projetoGestao.model.Solicitacao;
 import ifmt.cba.projetoGestao.model.Usuario;
 import ifmt.cba.projetoGestao.model.Usuario.Perfil;
+import ifmt.cba.projetoGestao.util.ErroDeViolacaoConstraint;
 
 public class DepartamentoAction extends DispatchAction{
 	
@@ -81,14 +82,12 @@ public class DepartamentoAction extends DispatchAction{
 		String tipo = request.getParameter("tipo");
 		Object objeto = dao.buscaPorId(tipo, id);
 		
-			if (usuarioLogado.getPerfil() == Perfil.PADRAO) {
-				Solicitacao solicitacao = (Solicitacao) objeto;	
-				if (solicitacao.getSolicitante().getId() == usuarioLogado.getId()) {
+			if (usuarioLogado.getPerfil() == Perfil.ADMIN) {
+				try {
 					dao.deleta(objeto);	
+				} catch (ErroDeViolacaoConstraint e) {
+					return new ActionForward("/navegacao.do?action=dashboard&departamentoComEntidadesVinculadas=true");
 				}
-				return mapping.findForward("dashboard");
-			} else if (usuarioLogado.getPerfil() == Perfil.ADMIN) {
-				dao.deleta(objeto);	
 				return mapping.findForward("dashboard");
 			}
 		
