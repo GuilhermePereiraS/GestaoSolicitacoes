@@ -35,7 +35,7 @@ public class UsuarioAction extends DispatchAction {
 		//melhorar a criptografia
 		dao.persiste(usuarioNovo);
 		
-		return new ActionForward("usuario.do?action=testaCadastro&loginUsuarioNovo=" + usuarioNovo.getLogin(),true);
+		return new ActionForward("/usuario.do?action=testaCadastro&loginUsuarioNovo=" + usuarioNovo.getLogin(),true);
 	}
 
 	public ActionForward atualiza(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -109,7 +109,7 @@ public class UsuarioAction extends DispatchAction {
 		if (usuarioLogado != null) {
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} else {
-			return mapping.findForward("paginaInicialTeste");
+			return mapping.findForward("paginaInicial");
 		}
 		
 		return mapping.findForward("dashboard");

@@ -146,12 +146,16 @@
 	
 	
 	<html:form action="/usuario.do?action=autentica">
-	<label>Usuario:</label><br>
-	<html:text property="login"/><br>
-	<label>Senha:</label><br>
-	<html:password property="senha"/><br>
-	<html:submit value="Login"/>
+		<label>Usuario:</label><br>
+		<html:text property="login"/><br>
+		<html:errors property="login"/>
+		<label>Senha:</label><br>
+		<html:password property="senha"/><br>
+		<html:submit value="Login"/>
 	</html:form>
+	
+	<html:errors property="senha"/>
+	
 	<label style="margin-left: 30px">Não tem uma conta?</label> <a href="cadastro.jsp" style="margin-left: 15px">cadastre-se aqui</a>
 </body>
 </html>

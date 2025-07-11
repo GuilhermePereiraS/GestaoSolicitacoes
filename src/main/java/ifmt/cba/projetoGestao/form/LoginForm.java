@@ -1,6 +1,11 @@
 package ifmt.cba.projetoGestao.form;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 public class LoginForm extends ActionForm {
 	private static final long serialVersionUID = 1L;

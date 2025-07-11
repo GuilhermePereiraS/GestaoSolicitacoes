@@ -12,7 +12,8 @@
         <form-bean name="usuarioTabelaForm" type="ifmt.cba.projetoGestao.form.UsuarioTabelaForm"/>
         <form-bean name="departamentoTabelaForm" type="ifmt.cba.projetoGestao.form.DepartamentoTabelaForm"/>
     </form-beans>
-
+    
+	
 	<action-mappings>
 	
 	
@@ -34,7 +35,9 @@
 	type="ifmt.cba.projetoGestao.actionDispatcher.UsuarioAction"
 	scope="request"	
 	parameter="action"
-	name="cadastroForm">
+	name="cadastroForm"
+	validate="true"
+	input="/login.jsp">
 	<forward name="dashboard" path="/navegacao.do?action=dashboard" redirect="true"/>
 	<forward name="paginaInicial" path="/navegacao.do?action=paginaInicial" redirect="true"/>
 	<forward name="paginaInicialTeste" path="/navegacao.do?action=paginaInicial"/>
@@ -175,5 +178,7 @@
 		</action>
 		-->
 	</action-mappings>
+
+	<message-resources parameter="ApplicationResources_pt_BR"/>
     
 </struts-config>
