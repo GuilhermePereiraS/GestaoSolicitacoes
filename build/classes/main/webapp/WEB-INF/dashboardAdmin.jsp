@@ -332,7 +332,14 @@ select:focus {
 						</c:otherwise>
 					</c:choose>
 					<td><fmt:formatDate value="${solicitacao.data_criacao}" pattern="dd/MM/yyyy" /></td>
-					<td><c:out value="${solicitacao.status}"></c:out></td>
+					<c:choose>
+						<c:when test="${solicitacao.status == 'EM_ANDAMENTO' }">
+							<td>EM ANDAMENTO</td>
+						</c:when>
+						<c:otherwise>
+							<td><c:out value="${solicitacao.status}"></c:out></td>
+						</c:otherwise>
+					</c:choose>
 					<td style="display: none;" class="idSolicitacao"><c:out value="${solicitacao.id}"></c:out></td>
 					<td class = "tdBotaoMenu" style="position: relative; overflow: visible; text-align: right;">
 				        <button class="menu-btn">⋯</button>
